@@ -1,0 +1,248 @@
+---
+import type { Project } from '../types/portfolio';
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-astro';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+const categories = [
+  { id: 'all', label: 'Todos' },
+  { id: 'fullstack', label: 'Fullstack' },
+  { id: 'backend', label: 'Backend' },
+  { id: 'frontend', label: 'Frontend' },
+  { id: 'cloud', label: 'Cloud' }
+];
+---
+
+<section id="proyectos" class="space-y-10 pt-10">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div>
+      <p class="text-xs font-mono tracking-wider uppercase text-zinc-500 mb-2">01. Portafolio</p>
+      <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Proyectos Destacados</h2>
+    </div>
+
+    <!-- Interactive Filter Tabs -->
+    <div class="flex flex-wrap items-center gap-1.5 p-1 bg-zinc-200/80 dark:bg-zinc-900 rounded-xl border border-zinc-300/60 dark:border-zinc-800 shadow-sm">
+      {categories.map((cat) => (
+        <button 
+          type="button"
+          data-filter-btn={cat.id}
+          class={`filter-tab-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer capitalize ${
+            cat.id === 'all' 
+              ? 'active-filter bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm font-bold' 
+              : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
+          }`}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Project Bento Grid -->
+  <div id="projects-bento-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 min-h-[420px]">
+    {projects.map((project) => (
+      <a 
+        href={`/proyectos/${project.id}`}
+        data-project-card
+        data-category={project.category}
+        class="project-card group relative p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 no-underline"
+      >
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-zinc-500 uppercase tracking-wider">{project.category}</span>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+              {project.metrics}
+            </span>
+          </div>
+
+          <h3 class="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors flex items-center justify-between">
+            <span>{project.title}</span>
+            <ArrowUpRight class="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-zinc-400" />
+          </h3>
+
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+
+        <div class="space-y-6 pt-6 mt-6 border-t border-zinc-100 dark:border-zinc-800/80">
+          <div class="flex flex-wrap items-center gap-2 text-xs text-zinc-500 font-mono">
+            {project.techStack.map((tech, idx) => (
+              <span>
+                {tech}{idx < project.techStack.length - 1 && <span aria-hidden="true" class="text-zinc-300 dark:text-zinc-700 ml-2">·</span>}
+              </span>
+            ))}
+          </div>
+
+          <div class="flex items-center justify-between text-xs font-medium text-zinc-900 dark:text-zinc-100">
+            <span class="underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 group-hover:decoration-amber-600 transition-colors">
+              Ver detalles completos →
+            </span>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <!-- Pagination Controls -->
+  <div id="projects-pagination-container" class="flex items-center justify-between pt-6 border-t border-zinc-200 dark:border-zinc-800">
+    <p id="pagination-info" class="text-xs text-zinc-500 font-mono">
+      Mostrando proyectos
+    </p>
+
+    <div class="flex items-center gap-2">
+      <button
+        id="prev-page-btn"
+        type="button"
+        class="p-2 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer shadow-sm"
+        aria-label="Página anterior"
+      >
+        <ChevronLeft class="w-4 h-4" />
+      </button>
+
+      <div id="page-numbers-container" class="flex items-center gap-1 px-2">
+        <!-- Dynamically rendered page buttons -->
+      </div>
+
+      <button
+        id="next-page-btn"
+        type="button"
+        class="p-2 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer shadow-sm"
+        aria-label="Página siguiente"
+      >
+        <ChevronRight class="w-4 h-4" />
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupProjectsSection() {
+    const ITEMS_PER_PAGE = 4;
+    let currentFilter = 'all';
+    let currentPage = 1;
+
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-card]'));
+    const filterBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter-btn]'));
+    const paginationContainer = document.getElementById('projects-pagination-container');
+    const paginationInfo = document.getElementById('pagination-info');
+    const pageNumbersContainer = document.getElementById('page-numbers-container');
+    const prevBtn = document.getElementById('prev-page-btn') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('next-page-btn') as HTMLButtonElement | null;
+
+    if (!cards.length) return;
+
+    function render() {
+      // 1. Filter matching cards
+      const matchedCards = cards.filter(card => {
+        if (currentFilter === 'all') return true;
+        return card.getAttribute('data-category') === currentFilter;
+      });
+
+      const totalItems = matchedCards.length;
+      const totalPages = Math.max(1, Math.ceil(totalItems / ITEMS_PER_PAGE));
+      
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      // 2. Hide all cards, show only paginated subset
+      cards.forEach(card => card.classList.add('hidden'));
+
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+
+      matchedCards.slice(startIndex, endIndex).forEach(card => {
+        card.classList.remove('hidden');
+      });
+
+      // 3. Update pagination visibility and text
+      if (paginationContainer) {
+        if (totalItems <= ITEMS_PER_PAGE && totalPages <= 1) {
+          paginationContainer.classList.add('hidden');
+        } else {
+          paginationContainer.classList.remove('hidden');
+        }
+      }
+
+      if (paginationInfo) {
+        paginationInfo.innerHTML = `Mostrando del <span class="font-bold text-zinc-900 dark:text-zinc-100">${totalItems > 0 ? startIndex + 1 : 0}</span> al <span class="font-bold text-zinc-900 dark:text-zinc-100">${endIndex}</span> de <span class="font-bold text-zinc-900 dark:text-zinc-100">${totalItems}</span> proyectos`;
+      }
+
+      // 4. Update Prev / Next buttons
+      if (prevBtn) {
+        prevBtn.disabled = currentPage <= 1;
+      }
+      if (nextBtn) {
+        nextBtn.disabled = currentPage >= totalPages;
+      }
+
+      // 5. Render numeric page buttons
+      if (pageNumbersContainer) {
+        pageNumbersContainer.innerHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = String(i);
+          btn.className = `w-8 h-8 rounded-lg text-xs font-mono font-medium transition-colors cursor-pointer ${
+            currentPage === i
+              ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-sm font-bold'
+              : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800'
+          }`;
+          btn.addEventListener('click', () => {
+            currentPage = i;
+            render();
+          });
+          pageNumbersContainer.appendChild(btn);
+        }
+      }
+
+      // 6. Update filter buttons styles
+      filterBtns.forEach(btn => {
+        const cat = btn.getAttribute('data-filter-btn');
+        if (cat === currentFilter) {
+          btn.className = 'filter-tab-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer capitalize active-filter bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm font-bold';
+        } else {
+          btn.className = 'filter-tab-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer capitalize text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100';
+        }
+      });
+    }
+
+    // Attach filter click events with binding guard
+    filterBtns.forEach(btn => {
+      if (!btn.hasAttribute('data-filter-bound')) {
+        btn.setAttribute('data-filter-bound', 'true');
+        btn.addEventListener('click', () => {
+          const cat = btn.getAttribute('data-filter-btn') || 'all';
+          currentFilter = cat;
+          currentPage = 1;
+          render();
+        });
+      }
+    });
+
+    if (prevBtn && !prevBtn.hasAttribute('data-prev-bound')) {
+      prevBtn.setAttribute('data-prev-bound', 'true');
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          render();
+        }
+      });
+    }
+
+    if (nextBtn && !nextBtn.hasAttribute('data-next-bound')) {
+      nextBtn.setAttribute('data-next-bound', 'true');
+      nextBtn.addEventListener('click', () => {
+        currentPage++;
+        render();
+      });
+    }
+
+    render();
+  }
+
+  document.addEventListener('astro:page-load', setupProjectsSection);
+</script>

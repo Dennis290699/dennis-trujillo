@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import SkillsSection from '../components/SkillsSection.astro';
+import ExperienceSection from '../components/ExperienceSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { PROJECTS, SKILLS, EXPERIENCE } from '../data/projects';
+---
+
+<Layout>
+  <main class="max-w-7xl mx-auto px-6 sm:px-8 pt-8 md:pt-12 pb-0 space-y-24 sm:space-y-28">
+    <Hero />
+
+    <ProjectsSection projects={PROJECTS} />
+
+    <SkillsSection skills={SKILLS} />
+
+    <ExperienceSection experience={EXPERIENCE} />
+
+    <ContactSection />
+  </main>
+</Layout>

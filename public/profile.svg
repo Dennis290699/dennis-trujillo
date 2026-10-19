@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 680" fill="none" className="w-full h-auto">
+  <defs>
+    <!-- Skin gradients -->
+    <linearGradient id="skin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7D0B2" />
+      <stop offset="50%" stop-color="#EBB692" />
+      <stop offset="100%" stop-color="#D99B73" />
+    </linearGradient>
+    <linearGradient id="skin-shadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D08E66" />
+      <stop offset="100%" stop-color="#B27048" />
+    </linearGradient>
+    <linearGradient id="skin-highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFE3D1" />
+      <stop offset="100%" stop-color="#F7D0B2" />
+    </linearGradient>
+
+    <!-- Hair gradients -->
+    <linearGradient id="hair" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#2D2422" />
+      <stop offset="50%" stop-color="#1A1514" />
+      <stop offset="100%" stop-color="#0E0C0B" />
+    </linearGradient>
+    <linearGradient id="hair-highlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A3B37" />
+      <stop offset="100%" stop-color="#221A17" />
+    </linearGradient>
+
+    <!-- Clothing gradients (High-end black tech turtleneck / blazer) -->
+    <linearGradient id="jacket" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#27272A" />
+      <stop offset="40%" stop-color="#18181B" />
+      <stop offset="100%" stop-color="#09090B" />
+    </linearGradient>
+    <linearGradient id="jacket-lapel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3F3F46" />
+      <stop offset="100%" stop-color="#27272A" />
+    </linearGradient>
+    <linearGradient id="turtleneck" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#18181B" />
+      <stop offset="100%" stop-color="#09090B" />
+    </linearGradient>
+
+    <!-- Glasses gradient -->
+    <linearGradient id="glasses" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#8C7323" />
+    </linearGradient>
+
+    <!-- Subtle subject ambient shadow -->
+    <filter id="soft-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <g filter="url(#soft-shadow)">
+    <!-- SHOULDERS / CLOTHING (Editorial Minimalist Techwear Cutout) -->
+    <!-- Base Torso -->
+    <path d="M70 680 C80 540, 120 450, 175 410 C210 385, 290 385, 325 410 C380 450, 420 540, 430 680 Z" fill="url(#jacket)" />
+    
+    <!-- Torso left folds & structure -->
+    <path d="M70 680 C82 560, 115 480, 160 435 C175 420, 195 440, 205 480 C215 520, 210 600, 200 680 Z" fill="#141417" opacity="0.6" />
+    <!-- Torso right folds -->
+    <path d="M430 680 C418 560, 385 480, 340 435 C325 420, 305 440, 295 480 C285 520, 290 600, 300 680 Z" fill="#141417" opacity="0.6" />
+    
+    <!-- Turtleneck Collar -->
+    <path d="M190 395 C190 345, 310 345, 310 395 C310 425, 190 425, 190 395 Z" fill="url(#turtleneck)" />
+    <path d="M192 375 C215 365, 285 365, 308 375 C310 405, 190 405, 192 375 Z" fill="#222226" />
+    <!-- Collar knit line ribs -->
+    <path d="M210 375 L210 405 M230 372 L230 408 M250 370 L250 410 M270 372 L270 408 M290 375 L290 405" stroke="#333338" stroke-width="1.5" stroke-linecap="round" />
+
+    <!-- NECK & SHADOW -->
+    <path d="M205 320 L205 385 C230 395, 270 395, 295 385 L295 320 Z" fill="url(#skin-shadow)" />
+    <!-- Neck light center -->
+    <path d="M225 320 L225 380 C240 385, 260 385, 275 380 L275 320 Z" fill="url(#skin)" opacity="0.8" />
+    <path d="M246 335 L248 365 C250 370, 252 370, 254 365 L256 335 Z" fill="url(#skin-shadow)" opacity="0.4" />
+
+    <!-- HEAD & JAWLINE -->
+    <!-- Ears -->
+    <!-- Left ear -->
+    <path d="M165 240 C155 240, 150 265, 155 285 C160 300, 172 305, 175 285 Z" fill="url(#skin-shadow)" />
+    <path d="M162 250 C158 255, 158 275, 164 280" stroke="#B27048" stroke-width="2" fill="none" />
+    <!-- Right ear -->
+    <path d="M335 240 C345 240, 350 265, 345 285 C340 300, 328 305, 325 285 Z" fill="url(#skin-shadow)" />
+    <path d="M338 250 C342 255, 342 275, 336 280" stroke="#B27048" stroke-width="2" fill="none" />
+
+    <!-- Face shape -->
+    <path d="M172 205 C172 135, 328 135, 328 205 C328 260, 320 310, 285 340 C265 358, 235 358, 215 340 C180 310, 172 260, 172 205 Z" fill="url(#skin)" />
+    
+    <!-- Jaw and cheek contouring -->
+    <path d="M174 250 C180 300, 210 345, 250 355 C290 345, 320 300, 326 250 C315 285, 290 330, 250 342 C210 330, 185 285, 174 250 Z" fill="url(#skin-shadow)" opacity="0.45" />
+
+    <!-- Beard / stylish clean stubble -->
+    <path d="M185 270 C190 310, 215 345, 250 350 C285 345, 310 310, 315 270 C312 290, 305 315, 290 332 C275 345, 225 345, 210 332 C195 315, 188 290, 185 270 Z" fill="#221A17" opacity="0.28" />
+
+    <!-- HAIR -->
+    <!-- Back & top volume -->
+    <path d="M165 200 C155 120, 210 70, 260 70 C310 70, 345 105, 345 180 C345 195, 335 185, 330 165 C310 100, 255 100, 180 150 C168 158, 165 180, 165 200 Z" fill="url(#hair)" />
+    <path d="M170 160 C180 110, 230 80, 280 82 C325 84, 345 120, 340 165 C325 125, 285 105, 235 115 C195 122, 178 145, 170 160 Z" fill="url(#hair-highlight)" />
+    
+    <!-- Modern side fade & texture -->
+    <path d="M168 200 L174 240 C172 245, 168 230, 168 200 Z" fill="#1F1816" />
+    <path d="M332 200 L326 240 C328 245, 332 230, 332 200 Z" fill="#1F1816" />
+
+    <!-- EYEBROWS -->
+    <path d="M192 205 C205 198, 225 200, 232 206 C225 204, 205 203, 192 205 Z" fill="#1A1514" />
+    <path d="M308 205 C295 198, 275 200, 268 206 C275 204, 295 203, 308 205 Z" fill="#1A1514" />
+
+    <!-- EYES -->
+    <!-- Eye whites -->
+    <ellipse cx="216" cy="222" rx="14" ry="7" fill="#FFFFFF" />
+    <ellipse cx="284" cy="222" rx="14" ry="7" fill="#FFFFFF" />
+    <!-- Iris -->
+    <circle cx="217" cy="222" r="6" fill="#3D291F" />
+    <circle cx="283" cy="222" r="6" fill="#3D291F" />
+    <!-- Pupils -->
+    <circle cx="217" cy="222" r="3" fill="#100A06" />
+    <circle cx="283" cy="222" r="3" fill="#100A06" />
+    <!-- Catchlights (glossy reflection) -->
+    <circle cx="219" cy="220" r="1.5" fill="#FFFFFF" />
+    <circle cx="285" cy="220" r="1.5" fill="#FFFFFF" />
+    <!-- Eyelids -->
+    <path d="M202 218 C210 213, 224 213, 230 218" stroke="#7A4525" stroke-width="2" stroke-linecap="round" fill="none" />
+    <path d="M270 218 C276 213, 290 213, 298 218" stroke="#7A4525" stroke-width="2" stroke-linecap="round" fill="none" />
+
+    <!-- NOSE -->
+    <path d="M246 210 L244 260 C240 264, 242 270, 250 270 C258 270, 260 264, 256 260 L254 210" fill="url(#skin-shadow)" opacity="0.35" />
+    <path d="M242 264 C246 268, 254 268, 258 264" stroke="#A8623B" stroke-width="2" stroke-linecap="round" fill="none" />
+
+    <!-- MOUTH / CONFIDENT SMILE -->
+    <path d="M228 298 C238 308, 262 308, 272 298" stroke="#873F28" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <!-- Lower lip shadow -->
+    <path d="M236 308 C244 314, 256 314, 264 308" stroke="#B27048" stroke-width="2" stroke-linecap="round" fill="none" />
+
+    <!-- DESIGNER GLASSES (Sophisticated Architectural Specs) -->
+    <!-- Left rim -->
+    <rect x="195" y="206" width="44" height="32" rx="9" stroke="#18181B" stroke-width="3" fill="rgba(255,255,255,0.12)" />
+    <!-- Right rim -->
+    <rect x="261" y="206" width="44" height="32" rx="9" stroke="#18181B" stroke-width="3" fill="rgba(255,255,255,0.12)" />
+    <!-- Bridge -->
+    <path d="M239 216 C245 213, 255 213, 261 216" stroke="#18181B" stroke-width="3" fill="none" />
+    <!-- Left temple -->
+    <path d="M195 216 L170 224" stroke="#18181B" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Right temple -->
+    <path d="M305 216 L330 224" stroke="#18181B" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Lens glare highlight -->
+    <path d="M202 210 L212 210 L204 226 L198 226 Z" fill="#FFFFFF" opacity="0.25" />
+    <path d="M268 210 L278 210 L270 226 L264 226 Z" fill="#FFFFFF" opacity="0.25" />
+  </g>
+</svg>

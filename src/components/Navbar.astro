@@ -1,0 +1,142 @@
+---
+import { Sun, Moon, Github, ArrowUpRight } from 'lucide-astro';
+---
+
+<header id="main-navbar" class="sticky top-4 z-50 w-full px-4 sm:px-6 pointer-events-none transition-all duration-300">
+  <div 
+    id="navbar-container" 
+    class="max-w-5xl mx-auto h-14 px-4 sm:px-6 rounded-full flex items-center justify-between gap-4 pointer-events-auto transition-all duration-300 backdrop-blur-md bg-white/70 dark:bg-[#111114]/75 border border-zinc-200/70 dark:border-zinc-800/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)]"
+  >
+    <!-- Brand Monogram -->
+    <a 
+      href="/" 
+      class="flex items-center gap-2.5 text-xs font-mono uppercase tracking-widest text-zinc-950 dark:text-zinc-50 group cursor-pointer bg-transparent border-0 p-0 no-underline"
+    >
+      <span class="w-2 h-2 rounded-full bg-amber-500 transition-transform group-hover:scale-125"></span>
+      <span class="font-bold">D. TRUJILLO</span>
+      <span class="hidden lg:inline text-[10px] text-zinc-400 dark:text-zinc-500 tracking-normal font-normal">/ ARQUITECTO CLOUD</span>
+    </a>
+
+    <!-- Center Nav Links with subtle pill hover -->
+    <nav class="hidden md:flex items-center gap-1 text-[11px] font-mono tracking-wider text-zinc-600 dark:text-zinc-400">
+      <a 
+        href="/#proyectos" 
+        class="px-3.5 py-1.5 rounded-full hover:text-zinc-950 dark:hover:text-zinc-50 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/70 transition-all cursor-pointer no-underline"
+      >
+        PROYECTOS
+      </a>
+      <a 
+        href="/#experiencia" 
+        class="px-3.5 py-1.5 rounded-full hover:text-zinc-950 dark:hover:text-zinc-50 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/70 transition-all cursor-pointer no-underline"
+      >
+        TRAYECTORIA
+      </a>
+      <a 
+        href="/#habilidades" 
+        class="px-3.5 py-1.5 rounded-full hover:text-zinc-950 dark:hover:text-zinc-50 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/70 transition-all cursor-pointer no-underline"
+      >
+        HABILIDADES
+      </a>
+    </nav>
+
+    <!-- Right Actions: Theme toggle, GitHub & Contact CTA -->
+    <div class="flex items-center gap-2 shrink-0">
+      <button 
+        id="theme-toggle-btn"
+        type="button"
+        aria-label="Cambiar tema claro u oscuro"
+        class="p-2 text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+      >
+        <span class="dark:hidden">
+          <Moon class="w-4 h-4" />
+        </span>
+        <span class="hidden dark:inline">
+          <Sun class="w-4 h-4" />
+        </span>
+      </button>
+
+      <a 
+        href="https://github.com/trujilloadrian29" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        aria-label="Perfil de GitHub"
+        class="hidden sm:inline-flex p-2 text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+      >
+        <Github class="w-4 h-4" />
+      </a>
+
+      <a 
+        href="/#contacto"
+        class="px-4 py-1.5 text-xs font-mono uppercase tracking-wider font-semibold text-white dark:text-zinc-950 bg-zinc-950 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 rounded-full transition-all flex items-center gap-1.5 shadow-xs cursor-pointer hover:shadow-sm no-underline"
+      >
+        <span>Contactar</span>
+        <ArrowUpRight class="w-3.5 h-3.5" />
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<script>
+  function setupNavbar() {
+    const navContainer = document.getElementById('navbar-container');
+    const themeBtn = document.getElementById('theme-toggle-btn');
+
+    // Scroll listener for sticky navbar styling
+    const onScroll = () => {
+      if (!navContainer) return;
+      if (window.scrollY > 20) {
+        navContainer.classList.add(
+          'backdrop-blur-xl',
+          'bg-white/85',
+          'dark:bg-[#111114]/90',
+          'border-zinc-300/80',
+          'dark:border-zinc-800/90',
+          'shadow-[0_8px_30px_rgba(0,0,0,0.08)]'
+        );
+        navContainer.classList.remove(
+          'backdrop-blur-md',
+          'bg-white/70',
+          'dark:bg-[#111114]/75',
+          'border-zinc-200/70',
+          'dark:border-zinc-800/60',
+          'shadow-[0_4px_20px_rgba(0,0,0,0.03)]'
+        );
+      } else {
+        navContainer.classList.remove(
+          'backdrop-blur-xl',
+          'bg-white/85',
+          'dark:bg-[#111114]/90',
+          'border-zinc-300/80',
+          'dark:border-zinc-800/90',
+          'shadow-[0_8px_30px_rgba(0,0,0,0.08)]'
+        );
+        navContainer.classList.add(
+          'backdrop-blur-md',
+          'bg-white/70',
+          'dark:bg-[#111114]/75',
+          'border-zinc-200/70',
+          'dark:border-zinc-800/60',
+          'shadow-[0_4px_20px_rgba(0,0,0,0.03)]'
+        );
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Theme toggle: vincular solo una vez para evitar acumulacion de listeners
+    if (themeBtn && !themeBtn.hasAttribute('data-theme-listener')) {
+      themeBtn.setAttribute('data-theme-listener', 'true');
+      themeBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        try {
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        } catch {}
+      });
+    }
+  }
+
+  // Setup unicamente en astro:page-load (se dispara en carga inicial y navegacion client-side)
+  document.addEventListener('astro:page-load', setupNavbar);
+</script>

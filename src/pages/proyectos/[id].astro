@@ -1,0 +1,430 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { PROJECTS } from '../../data/projects';
+import type { Project } from '../../types/portfolio';
+import { 
+  ArrowLeft, 
+  Github, 
+  ExternalLink, 
+  ArrowUpRight, 
+  Terminal, 
+  Cpu, 
+  Sparkles, 
+  Layers, 
+  ShieldCheck, 
+  CheckCircle2, 
+  Zap,
+  Activity
+} from 'lucide-astro';
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({
+    params: { id: project.id },
+    props: { project }
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
+---
+
+<Layout 
+  title={`${project.title} – Dennis Trujillo`}
+  description={project.description}
+>
+  <article class="relative max-w-7xl mx-auto px-6 sm:px-8 py-6 md:py-12 space-y-16 select-none animate-in fade-in duration-500">
+    
+    <!-- Lateral Watermarks: Editorial Detail View -->
+    <!-- Left Lateral Watermark -->
+    <aside 
+      aria-hidden="true"
+      class="absolute -left-4 sm:-left-6 lg:-left-6 xl:-left-10 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-6 text-[10px] font-mono tracking-[0.25em] uppercase pointer-events-none select-none z-10"
+    >
+      <span class="w-px h-20 bg-gradient-to-b from-transparent via-zinc-300 dark:via-zinc-700 to-transparent"></span>
+      <span class="[writing-mode:vertical-lr] rotate-180 flex items-center gap-3 whitespace-nowrap text-zinc-500 dark:text-zinc-400 font-medium">
+        <span class="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-600"></span>
+        CASO DE ESTUDIO // INGENIERÍA DE SISTEMAS · PRODUCCIÓN
+      </span>
+      <span class="w-px h-20 bg-gradient-to-b from-transparent via-zinc-300 dark:via-zinc-700 to-transparent"></span>
+    </aside>
+
+    <!-- Right Lateral Watermark -->
+    <aside 
+      aria-hidden="true"
+      class="absolute -right-4 sm:-right-6 lg:-right-6 xl:-right-10 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-6 text-[10px] font-mono tracking-[0.25em] uppercase pointer-events-none select-none z-10"
+    >
+      <span class="w-px h-20 bg-gradient-to-b from-transparent via-zinc-300 dark:via-zinc-700 to-transparent"></span>
+      <span class="[writing-mode:vertical-rl] flex items-center gap-3 whitespace-nowrap text-zinc-700 dark:text-zinc-300 font-semibold">
+        <span class="w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-zinc-100 animate-pulse"></span>
+        DENNIS TRUJILLO // ARQUITECTURA &amp; SOFTWARE · 2026
+      </span>
+      <span class="w-px h-20 bg-gradient-to-b from-transparent via-zinc-300 dark:via-zinc-700 to-transparent"></span>
+    </aside>
+
+    <!-- 1. TOP EDITORIAL BREADCRUMB & METADATA -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-zinc-900/15 dark:border-white/15">
+      <a 
+        href="/#proyectos"
+        class="inline-flex items-center gap-2.5 px-4 py-2 text-xs font-mono uppercase tracking-wider text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all rounded-full border border-zinc-300 dark:border-zinc-700 cursor-pointer shadow-xs w-fit group no-underline"
+      >
+        <ArrowLeft class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+        <span>Volver a Proyectos</span>
+      </a>
+
+      <div class="flex items-center gap-3 text-xs font-mono text-zinc-500 uppercase tracking-widest">
+        <span>MONOGRAFÍA TÉCNICA</span>
+        <span class="text-zinc-300 dark:text-zinc-700">/</span>
+        <span class="text-zinc-900 dark:text-zinc-100 font-bold capitalize">{project.category}</span>
+        <span class="text-zinc-300 dark:text-zinc-700">/</span>
+        <span class="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          VERIFICADO EN PRODUCCIÓN
+        </span>
+      </div>
+    </div>
+
+    <!-- 2. GRAND EDITORIAL COVER HEADLINE -->
+    <div class="space-y-6 pt-2">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest px-3 py-1 bg-amber-500/10 text-amber-700 dark:text-amber-400 rounded-full border border-amber-500/20 font-bold">
+          <Sparkles class="w-3 h-3 text-amber-500" />
+          <span>CASO DE ESTUDIO // {project.category.toUpperCase()}</span>
+        </span>
+        <span class="text-[11px] font-mono text-zinc-500 tracking-wider uppercase">
+          ID // {project.id}
+        </span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 leading-[0.92] uppercase select-text">
+        {project.title}
+      </h1>
+
+      <p class="text-xl sm:text-2xl md:text-3xl text-zinc-700 dark:text-zinc-300 font-serif italic max-w-4xl leading-relaxed select-text">
+        &ldquo;{project.subtitle}&rdquo;
+      </p>
+
+      <!-- Action buttons -->
+      <div class="flex flex-wrap items-center gap-4 pt-3">
+        <a 
+          href={project.githubUrl} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="px-7 py-3.5 text-xs font-mono uppercase tracking-wider font-bold text-white dark:text-zinc-950 bg-zinc-950 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all rounded-xl flex items-center gap-2.5 shadow-md hover:shadow-lg cursor-pointer no-underline group"
+        >
+          <Github class="w-4 h-4" />
+          <span>Ver Repositorio GitHub</span>
+          <ArrowUpRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </a>
+
+        <a 
+          href={project.liveUrl} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="px-7 py-3.5 text-xs font-mono uppercase tracking-wider font-semibold text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all rounded-xl border border-zinc-300 dark:border-zinc-700 flex items-center gap-2.5 shadow-xs cursor-pointer no-underline"
+        >
+          <ExternalLink class="w-4 h-4" />
+          <span>Demostración en Vivo</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. EDITORIAL SPECS STRIP (FICHA TÉCNICA) -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-y border-zinc-900/15 dark:border-white/15">
+      <div class="space-y-1">
+        <span class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 block">MÉTRICA PRINCIPAL</span>
+        <p class="text-base sm:text-lg font-bold font-mono text-zinc-950 dark:text-zinc-50 tabular-nums">{project.metrics}</p>
+      </div>
+      <div class="space-y-1">
+        <span class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 block">CATEGORÍA DE SISTEMA</span>
+        <p class="text-base sm:text-lg font-bold font-mono text-amber-600 dark:text-amber-400 capitalize">{project.category}</p>
+      </div>
+      <div class="space-y-1">
+        <span class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 block">PARADIGMA ARQUITECTÓNICO</span>
+        <p class="text-sm sm:text-base font-semibold font-mono text-zinc-950 dark:text-zinc-50 truncate" title={project.architecture}>
+          Clean Architecture & DDD
+        </p>
+      </div>
+      <div class="space-y-1">
+        <span class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 block">DISPONIBILIDAD & ESTADO</span>
+        <p class="text-base sm:text-lg font-bold font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          Producción 100%
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. MAIN EDITORIAL SPREAD: NARRATIVE + TECHNICAL BLUEPRINT -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+      
+      <!-- Left Column: Narrative, Context & Milestones (7 cols) -->
+      <div class="lg:col-span-7 space-y-14">
+        
+        <!-- Section 01: Overview with Editorial Drop Cap -->
+        <div class="space-y-5">
+          <div class="flex items-center gap-3 text-xs font-mono tracking-widest uppercase text-zinc-500">
+            <span class="w-2 h-2 rounded-full bg-zinc-900 dark:bg-zinc-100"></span>
+            <span>01 // VISIÓN GENERAL DEL SISTEMA</span>
+          </div>
+
+          <p class="text-lg sm:text-xl text-zinc-800 dark:text-zinc-200 leading-relaxed font-normal select-text first-letter:text-5xl sm:first-letter:text-6xl first-letter:font-black first-letter:float-left first-letter:mr-3.5 first-letter:text-zinc-950 dark:first-letter:text-zinc-100 first-letter:leading-none">
+            {project.longDescription}
+          </p>
+        </div>
+
+        <!-- Section 02: Key Milestones -->
+        <div class="space-y-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500">
+              02 // LOGROS TÉCNICOS & RESULTADOS MEDIBLES
+            </span>
+            <span class="text-[10px] font-mono text-zinc-400">KPIs CUANTIFICADOS</span>
+          </div>
+
+          <div class="space-y-4">
+            {project.highlights.map((item, idx) => (
+              <div class="group flex items-start gap-5 p-6 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200/90 dark:border-zinc-800/90 hover:border-amber-500/50 dark:hover:border-amber-500/40 transition-all duration-300 shadow-xs hover:shadow-md">
+                <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-500 px-2.5 py-1 rounded bg-amber-500/10 dark:bg-amber-400/10 shrink-0 mt-0.5">
+                  0{idx + 1}
+                </span>
+                <p class="text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed select-text font-normal">
+                  {item}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Section 03: The Technical Challenge Callout -->
+        <div class="relative p-7 sm:p-9 rounded-3xl bg-zinc-100/90 dark:bg-zinc-900/60 border border-zinc-300/80 dark:border-zinc-800 space-y-4 overflow-hidden">
+          <div class="flex items-center gap-2.5 text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-bold">
+            <Cpu class="w-4 h-4" />
+            <span>03 // EL DESAFÍO DE INGENIERÍA</span>
+          </div>
+
+          <p class="text-base sm:text-lg text-zinc-800 dark:text-zinc-200 leading-relaxed select-text font-medium">
+            {project.challenges}
+          </p>
+
+          <div class="pt-2 flex items-center gap-2 text-xs font-mono text-zinc-500">
+            <CheckCircle2 class="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>Resuelto mediante diseño modular y pruebas de estrés automatizadas</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Technical Blueprint Card & Stack (5 cols) -->
+      <div class="lg:col-span-5 space-y-8 sticky top-24">
+        
+        <!-- Blueprint Architecture Cockpit Card -->
+        <div class="rounded-3xl bg-zinc-950 text-zinc-100 border border-zinc-800 p-6 sm:p-8 space-y-7 shadow-2xl relative overflow-hidden">
+          
+          <!-- Background Blueprint Grid Pattern -->
+          <div 
+            class="absolute inset-0 opacity-[0.06] pointer-events-none" 
+            style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"
+          ></div>
+
+          <!-- Ambient Glow Inset -->
+          <div class="absolute -top-20 -right-20 w-52 h-52 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <!-- Terminal Style Header Bar with macOS Window Dots -->
+          <div class="relative z-10 flex items-center justify-between border-b border-zinc-800 pb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+            </div>
+            
+            <div class="flex items-center gap-2 font-mono text-xs text-zinc-400">
+              <Terminal class="w-3.5 h-3.5 text-emerald-400" />
+              <span>SPECS // ARCH_KERNEL</span>
+            </div>
+
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-emerald-400 border border-zinc-800">
+              ACTIVO
+            </span>
+          </div>
+
+          <!-- ASCII Architectural Flow Pipeline -->
+          <div class="relative z-10 p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 font-mono text-[11px] text-zinc-400 space-y-1">
+            <div class="text-[9px] uppercase tracking-wider text-zinc-500 mb-1">PIPELINE DE FLUJO // DATA TRANSIT</div>
+            <div class="text-zinc-300 font-bold">CLIENT &lt;──&gt; EDGE / CDN &lt;──&gt; CORE SERVICES</div>
+            <div class="text-emerald-400/90 text-[10px]">└─ GRP / WEBSOCKET BUS ──&gt; POSTGRES / REDIS</div>
+          </div>
+
+          <!-- Architecture Pattern Specification -->
+          <div class="relative z-10 space-y-2">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
+              PATRÓN ARQUITECTÓNICO PRINCIPAL
+            </span>
+            <p class="text-xs sm:text-sm font-mono text-zinc-200 leading-relaxed bg-zinc-900/80 p-4 rounded-xl border border-zinc-800 select-text">
+              {project.architecture}
+            </p>
+          </div>
+
+          <!-- Tech Stack Tag Cloud -->
+          <div class="relative z-10 space-y-3">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block">
+              STACK TECNOLÓGICO SELECCIONADO
+            </span>
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              {project.techStack.map((tech) => (
+                <span class="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-850 rounded-lg border border-zinc-800 text-zinc-200 font-medium transition-colors">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- System Telemetry & Security Audit -->
+          <div class="relative z-10 pt-4 border-t border-zinc-800/80 grid grid-cols-2 gap-4 text-xs font-mono">
+            <div>
+              <span class="text-zinc-500 text-[10px] block uppercase">AUDITORÍA DE SEGURIDAD</span>
+              <span class="text-emerald-400 font-bold flex items-center gap-1.5 mt-0.5">
+                <ShieldCheck class="w-3.5 h-3.5" />
+                0 Vulnerabilidades
+              </span>
+            </div>
+            <div>
+              <span class="text-zinc-500 text-[10px] block uppercase">LATENCIA OBJETIVO</span>
+              <span class="text-zinc-200 font-bold flex items-center gap-1.5 mt-0.5">
+                <Zap class="w-3.5 h-3.5 text-amber-400" />
+                &lt; 15 ms
+              </span>
+            </div>
+          </div>
+
+          <!-- Cockpit Action CTA Button -->
+          <div class="relative z-10 pt-2">
+            <a 
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full py-3 px-4 bg-zinc-100 hover:bg-white text-zinc-950 font-mono text-xs uppercase tracking-wider font-bold rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer no-underline"
+            >
+              <Github class="w-4 h-4" />
+              <span>Explorar Código Fuente</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 5. ELEVATED EDITORIAL RELATED PROJECTS CARDS -->
+    <div class="pt-16 border-t border-zinc-900/15 dark:border-white/15 space-y-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-600 dark:text-amber-500 font-bold">
+            <span>// EXPLORADOR DE PROYECTOS</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-tight text-zinc-950 dark:text-zinc-50 mt-1">
+            Casos de Estudio Relacionados
+          </h2>
+        </div>
+        <span class="text-xs font-mono text-zinc-500 tracking-wider uppercase">
+          SELECCIONADOS POR AFINIDAD DE ARQUITECTURA
+        </span>
+      </div>
+
+      <!-- Refined Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {relatedProjects.map((rel, idx) => (
+          <a 
+            href={`/proyectos/${rel.id}`}
+            class="relative p-8 sm:p-10 rounded-3xl bg-white dark:bg-[#121216] border border-zinc-200/90 dark:border-zinc-800/90 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden group cursor-pointer no-underline"
+          >
+            <!-- Ambient lighting on hover -->
+            <div class="absolute top-0 right-0 w-40 h-40 bg-amber-500/5 rounded-full blur-3xl pointer-events-none group-hover:scale-150 transition-transform duration-500"></div>
+
+            <!-- Corner registration mark -->
+            <span aria-hidden="true" class="absolute top-4 right-4 text-zinc-300 dark:text-zinc-700 font-mono text-xs">+</span>
+
+            <div class="space-y-6 relative z-10">
+              
+              <!-- Header Strip -->
+              <div class="flex items-center justify-between gap-3 text-xs font-mono">
+                <div class="flex items-center gap-2">
+                  <span class="text-amber-600 dark:text-amber-500 font-bold">
+                    FOLIO [0{idx + 1}]
+                  </span>
+                  <span class="text-zinc-300 dark:text-zinc-700">/</span>
+                  <span class="uppercase text-zinc-500 tracking-wider">
+                    {rel.category}
+                  </span>
+                </div>
+
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-zinc-100 dark:bg-zinc-800/90 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-zinc-700/60">
+                  {rel.metrics}
+                </span>
+              </div>
+
+              <!-- Title & Editorial Deck -->
+              <div class="space-y-2">
+                <h3 class="text-2xl sm:text-3xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors flex items-center justify-between gap-3">
+                  <span>{rel.title}</span>
+                </h3>
+                
+                <p class="text-sm text-zinc-600 dark:text-zinc-400 font-serif italic line-clamp-1">
+                  &ldquo;{rel.subtitle}&rdquo;
+                </p>
+              </div>
+
+              <!-- Narrative summary -->
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
+                {rel.description}
+              </p>
+
+              <!-- Tech stack badges -->
+              <div class="flex flex-wrap items-center gap-2 pt-1 text-xs font-mono text-zinc-500">
+                {rel.techStack.slice(0, 4).map((tech) => (
+                  <span class="px-2.5 py-1 bg-zinc-100/80 dark:bg-zinc-800/60 rounded text-[11px] text-zinc-700 dark:text-zinc-300 border border-zinc-200/70 dark:border-zinc-800">
+                    {tech}
+                  </span>
+                ))}
+                {rel.techStack.length > 4 && (
+                  <span class="text-[11px] text-zinc-400">+{rel.techStack.length - 4} más</span>
+                )}
+              </div>
+
+            </div>
+
+            <!-- Bottom Interactive Strip -->
+            <div class="pt-6 mt-6 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between relative z-10">
+              <span class="text-xs font-mono uppercase tracking-widest font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors flex items-center gap-2">
+                <span>Explorar Monografía</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+
+              <div class="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800/90 flex items-center justify-center text-zinc-700 dark:text-zinc-300 group-hover:bg-zinc-950 group-hover:text-white dark:group-hover:bg-zinc-100 dark:group-hover:text-zinc-950 transition-all duration-300 shadow-xs">
+                <ArrowUpRight class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </div>
+            </div>
+
+          </a>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- 6. BOTTOM NAVIGATION -->
+    <div class="pt-8 flex justify-center">
+      <a 
+        href="/#proyectos"
+        class="px-8 py-4 text-xs font-mono uppercase tracking-wider font-bold text-white dark:text-zinc-950 bg-zinc-950 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all rounded-full flex items-center gap-2.5 shadow-md cursor-pointer hover:shadow-lg no-underline"
+      >
+        <ArrowLeft class="w-4 h-4" />
+        <span>Volver a la Lista de Proyectos</span>
+      </a>
+    </div>
+
+  </article>
+</Layout>
