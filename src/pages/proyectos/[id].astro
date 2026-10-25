@@ -30,6 +30,14 @@ interface Props {
 
 const { project } = Astro.props;
 const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
+
+const categoryLabels: Record<string, string> = {
+  fullstack: 'Fullstack',
+  frontend: 'Frontend',
+  backend: 'Backend & Big Data',
+  ai: 'IA & Machine Learning',
+  systems: 'Gráficos & Videojuegos'
+};
 ---
 
 <Layout 
@@ -78,7 +86,7 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
       <div class="flex items-center gap-3 text-xs font-mono text-zinc-500 uppercase tracking-widest">
         <span>MONOGRAFÍA TÉCNICA</span>
         <span class="text-zinc-300 dark:text-zinc-700">/</span>
-        <span class="text-zinc-900 dark:text-zinc-100 font-bold capitalize">{project.category}</span>
+        <span class="text-zinc-900 dark:text-zinc-100 font-bold capitalize">{categoryLabels[project.category] || project.category}</span>
         <span class="text-zinc-300 dark:text-zinc-700">/</span>
         <span class="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -92,7 +100,7 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
       <div class="flex flex-wrap items-center gap-3">
         <span class="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest px-3 py-1 bg-amber-500/10 text-amber-700 dark:text-amber-400 rounded-full border border-amber-500/20 font-bold">
           <Sparkles class="w-3 h-3 text-amber-500" />
-          <span>CASO DE ESTUDIO // {project.category.toUpperCase()}</span>
+          <span>CASO DE ESTUDIO // {(categoryLabels[project.category] || project.category).toUpperCase()}</span>
         </span>
         <span class="text-[11px] font-mono text-zinc-500 tracking-wider uppercase">
           ID // {project.id}
@@ -127,7 +135,7 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
           class="px-7 py-3.5 text-xs font-mono uppercase tracking-wider font-semibold text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all rounded-xl border border-zinc-300 dark:border-zinc-700 flex items-center gap-2.5 shadow-xs cursor-pointer no-underline"
         >
           <ExternalLink class="w-4 h-4" />
-          <span>Demostración en Vivo</span>
+          <span>{project.liveUrlLabel || 'Demostración en Vivo'}</span>
         </a>
       </div>
     </div>
@@ -140,12 +148,12 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
       </div>
       <div class="space-y-1">
         <span class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 block">CATEGORÍA DE SISTEMA</span>
-        <p class="text-base sm:text-lg font-bold font-mono text-amber-600 dark:text-amber-400 capitalize">{project.category}</p>
+        <p class="text-base sm:text-lg font-bold font-mono text-amber-600 dark:text-amber-400 capitalize">{categoryLabels[project.category] || project.category}</p>
       </div>
       <div class="space-y-1">
         <span class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 block">PARADIGMA ARQUITECTÓNICO</span>
-        <p class="text-sm sm:text-base font-semibold font-mono text-zinc-950 dark:text-zinc-50 truncate" title={project.architecture}>
-          Clean Architecture & DDD
+        <p class="text-xs sm:text-sm font-semibold font-mono text-zinc-950 dark:text-zinc-50 truncate" title={project.architecture}>
+          {project.architecture}
         </p>
       </div>
       <div class="space-y-1">
@@ -163,23 +171,39 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
       <!-- Left Column: Narrative, Context & Milestones (7 cols) -->
       <div class="lg:col-span-7 space-y-14">
         
-        <!-- Section 01: Overview with Editorial Drop Cap -->
+        <!-- Section 01: Problem Statement (The Why) -->
         <div class="space-y-5">
-          <div class="flex items-center gap-3 text-xs font-mono tracking-widest uppercase text-zinc-500">
-            <span class="w-2 h-2 rounded-full bg-zinc-900 dark:bg-zinc-100"></span>
-            <span>01 // VISIÓN GENERAL DEL SISTEMA</span>
+          <div class="flex items-center gap-3 text-xs font-mono tracking-widest uppercase text-amber-600 dark:text-amber-400 font-bold">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            <span>01 // PROBLEMÁTICA & JUSTIFICACIÓN TÉCNICA (EL PORQUÉ)</span>
           </div>
 
           <p class="text-lg sm:text-xl text-zinc-800 dark:text-zinc-200 leading-relaxed font-normal select-text first-letter:text-5xl sm:first-letter:text-6xl first-letter:font-black first-letter:float-left first-letter:mr-3.5 first-letter:text-zinc-950 dark:first-letter:text-zinc-100 first-letter:leading-none">
-            {project.longDescription}
+            {project.problemStatement}
           </p>
         </div>
 
-        <!-- Section 02: Key Milestones -->
+        <!-- Section 02: Solution Architecture & System Vision -->
+        <div class="space-y-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+          <div class="flex items-center gap-3 text-xs font-mono tracking-widest uppercase text-zinc-500">
+            <span class="w-2 h-2 rounded-full bg-zinc-900 dark:bg-zinc-100"></span>
+            <span>02 // ENFOQUE DE SOLUCIÓN & VISIÓN DEL SISTEMA</span>
+          </div>
+
+          <p class="text-base sm:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed font-normal select-text">
+            {project.solution}
+          </p>
+
+          <div class="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200/80 dark:border-zinc-800/80 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed select-text italic">
+            &ldquo;{project.longDescription}&rdquo;
+          </div>
+        </div>
+
+        <!-- Section 03: Key Milestones -->
         <div class="space-y-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono uppercase tracking-widest text-zinc-500">
-              02 // LOGROS TÉCNICOS & RESULTADOS MEDIBLES
+              03 // LOGROS TÉCNICOS & RESULTADOS MEDIBLES
             </span>
             <span class="text-[10px] font-mono text-zinc-400">KPIs CUANTIFICADOS</span>
           </div>
@@ -198,11 +222,11 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
           </div>
         </div>
 
-        <!-- Section 03: The Technical Challenge Callout -->
+        <!-- Section 04: The Technical Challenge Callout -->
         <div class="relative p-7 sm:p-9 rounded-3xl bg-zinc-100/90 dark:bg-zinc-900/60 border border-zinc-300/80 dark:border-zinc-800 space-y-4 overflow-hidden">
           <div class="flex items-center gap-2.5 text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-bold">
             <Cpu class="w-4 h-4" />
-            <span>03 // EL DESAFÍO DE INGENIERÍA</span>
+            <span>04 // EL DESAFÍO DE INGENIERÍA</span>
           </div>
 
           <p class="text-base sm:text-lg text-zinc-800 dark:text-zinc-200 leading-relaxed select-text font-medium">
@@ -211,7 +235,7 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
 
           <div class="pt-2 flex items-center gap-2 text-xs font-mono text-zinc-500">
             <CheckCircle2 class="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Resuelto mediante diseño modular y pruebas de estrés automatizadas</span>
+            <span>Resuelto mediante diseño modular y pruebas de verificación técnica</span>
           </div>
         </div>
 
@@ -246,15 +270,21 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
             </div>
 
             <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-emerald-400 border border-zinc-800">
-              ACTIVO
+              VERIFICADO
             </span>
           </div>
 
           <!-- ASCII Architectural Flow Pipeline -->
           <div class="relative z-10 p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 font-mono text-[11px] text-zinc-400 space-y-1">
-            <div class="text-[9px] uppercase tracking-wider text-zinc-500 mb-1">PIPELINE DE FLUJO // DATA TRANSIT</div>
-            <div class="text-zinc-300 font-bold">CLIENT &lt;──&gt; EDGE / CDN &lt;──&gt; CORE SERVICES</div>
-            <div class="text-emerald-400/90 text-[10px]">└─ GRP / WEBSOCKET BUS ──&gt; POSTGRES / REDIS</div>
+            <div class="text-[9px] uppercase tracking-wider text-zinc-500 mb-1">
+              {project.pipelineFlow?.stage || 'PIPELINE DE FLUJO // DATA TRANSIT'}
+            </div>
+            <div class="text-zinc-300 font-bold">
+              {project.pipelineFlow?.flow || 'CLIENT <──> EDGE / CDN <──> CORE SERVICES'}
+            </div>
+            <div class="text-emerald-400/90 text-[10px]">
+              {project.pipelineFlow?.sub || '└─ EVENT BUS ──> STORAGE CLUSTER'}
+            </div>
           </div>
 
           <!-- Architecture Pattern Specification -->
@@ -358,7 +388,7 @@ const relatedProjects = PROJECTS.filter((p) => p.id !== project.id).slice(0, 2);
                   </span>
                   <span class="text-zinc-300 dark:text-zinc-700">/</span>
                   <span class="uppercase text-zinc-500 tracking-wider">
-                    {rel.category}
+                    {categoryLabels[rel.category] || rel.category}
                   </span>
                 </div>
 
