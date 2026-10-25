@@ -60,12 +60,9 @@ const categoryLabels: Record<string, string> = {
         class="project-card group relative p-6 sm:p-8 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 transition-all duration-300 flex flex-col justify-between cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 no-underline"
       >
         <div class="space-y-4">
-          <div class="flex items-center justify-between">
+          <div>
             <span class="text-xs font-mono text-amber-600 dark:text-amber-400 font-semibold uppercase tracking-wider">
               {categoryLabels[project.category] || project.category}
-            </span>
-            <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
-              {project.metrics}
             </span>
           </div>
 
