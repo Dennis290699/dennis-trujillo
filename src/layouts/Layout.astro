@@ -15,6 +15,8 @@ const {
   description = "Portafolio profesional de Dennis Trujillo, Desarrollador Full Stack especializado en Astro, React, TypeScript, Node.js y arquitecturas cloud escalables.",
   ogImage = "/profile.png"
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 ---
 
 <!doctype html>
@@ -24,19 +26,25 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Dennis Trujillo" />
+    <meta name="robots" content="index, follow" />
 
     <!-- OpenGraph Social Cards -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Portafolio de Dennis Trujillo" />
+    <meta property="og:locale" content="es_ES" />
     <meta property="og:image" content={ogImage} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
@@ -56,7 +64,7 @@ const {
       "url": "https://github.com/Dennis290699",
       "sameAs": [
         "https://github.com/Dennis290699",
-        "https://linkedin.com/"
+        "https://www.linkedin.com/in/dennis-trujillo-vistin"
       ],
       "knowsAbout": ["Astro", "React", "TypeScript", "Node.js", "Cloud Architecture", "PostgreSQL", "Full Stack Engineering"]
     }
