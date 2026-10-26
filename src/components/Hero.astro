@@ -178,8 +178,10 @@ import {
       <!-- Botón de Descargar CV -->
       <a 
         id="hero-cv-btn"
-        href="/cv-dennis-trujillo.pdf"
+        href="/Dennis_Trujillo_CV.pdf"
         download="Dennis_Trujillo_CV.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
         class="px-6 py-3.5 text-xs font-mono font-medium text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all rounded-xl border border-zinc-300 dark:border-zinc-700 flex items-center gap-2 cursor-pointer shadow-xs group no-underline"
       >
         <FileDown class="w-4 h-4 text-zinc-600 dark:text-zinc-400 group-hover:translate-y-0.5 transition-transform" />
@@ -198,7 +200,7 @@ import {
         </a>
 
         <a 
-          href="https://linkedin.com" 
+          href="https://www.linkedin.com/in/dennis-trujillo-vistin"
           target="_blank" 
           rel="noopener noreferrer"
           aria-label="Perfil de LinkedIn"
@@ -315,6 +317,15 @@ import {
           const avatarTranslateY = (progress * 18).toFixed(2);
           avatarImg.style.transform = `scale(${avatarScale}) translate3d(0, ${avatarTranslateY}px, 0)`;
 
+          // El badge técnico acompaña el desplazamiento de la imagen con un crecimiento muy sutil y controlado
+          if (badge) {
+            const badgeScale = (1 + progress * 0.08).toFixed(3);
+            badge.style.transform = `scale(${badgeScale}) translate3d(0, ${avatarTranslateY}px, 0)`;
+            if (badge.style.opacity !== '') {
+              badge.style.opacity = '';
+            }
+          }
+
           // El resplandor (halo) y anillo reaccionan desde el inicio
           if (avatarHalo) {
             const haloScale = (1 + progress * 0.45).toFixed(3);
@@ -331,7 +342,7 @@ import {
           const isDesktop = window.innerWidth >= 1024;
 
           if (isDesktop) {
-            const textFadeStart = 0.50;
+            const textFadeStart = 0.55;
             let textOpacity = 1;
             let textShift = 0;
 
@@ -387,11 +398,6 @@ import {
             }
           }
 
-          if (badge) {
-            // El badge técnico del avatar se desvanece de forma suave y sincronizada
-            const badgeOpacity = progress > 0.4 ? Math.max(0, 1 - ((progress - 0.4) / 0.5)).toFixed(3) : '1';
-            badge.style.opacity = badgeOpacity;
-          }
 
           ticking = false;
         });
