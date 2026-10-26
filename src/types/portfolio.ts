@@ -36,4 +36,7 @@ export interface ExperienceItem {
   company: string;
   description: string;
   stack: string[];
+  tag?: string;
+  context?: string;
+  certificateImage?: string;
 }

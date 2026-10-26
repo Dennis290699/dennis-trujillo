@@ -1,6 +1,6 @@
 ---
 import type { ExperienceItem } from '../types/portfolio';
-import { Terminal, GitBranch, Code2, Cpu, ChevronLeft, ChevronRight } from 'lucide-astro';
+import { Terminal, GitBranch, Code2, Cpu, ChevronLeft, ChevronRight, X } from 'lucide-astro';
 
 interface Props {
   experience: ExperienceItem[];
@@ -16,7 +16,7 @@ const milestoneIcons = [
   Cpu        // Core Foundations / Junior Systems
 ];
 
-const milestoneMeta = [
+const defaultMilestoneMeta = [
   { tag: 'ROL ACTUAL // SISTEMAS EN PRODUCCIÓN', context: 'Liderazgo técnico, arquitecturas cloud y microservicios escalables.' },
   { tag: 'ETAPA PREVIA // CONCURRENCIA & APIS', context: 'Sistemas fintech, logística de alta escala y serverless.' },
   { tag: 'CONSOLIDACIÓN // INTERFACES & RENDIMIENTO', context: 'Interfaces accesibles, sistemas de diseño y rendimiento web.' },
@@ -90,28 +90,30 @@ for (let i = 0; i < experience.length; i += pageSize) {
             const globalIdx = pageIdx * pageSize + itemIdx;
             const isEven = globalIdx % 2 === 0;
             const IconComponent = milestoneIcons[globalIdx % milestoneIcons.length] || Terminal;
-            const meta = milestoneMeta[globalIdx % milestoneMeta.length] || { tag: 'ETAPA // DESARROLLO', context: 'Ingeniería de software' };
+            const fallbackMeta = defaultMilestoneMeta[globalIdx % defaultMilestoneMeta.length] || { tag: 'ETAPA // DESARROLLO', context: 'Ingeniería de software' };
+            const metaTag = exp.tag || fallbackMeta.tag;
+            const metaContext = exp.context || fallbackMeta.context;
             const isCurrent = exp.period.toLowerCase().includes('presente');
             const itemNumber = String(globalIdx + 1).padStart(2, '0');
 
             return (
               <div class="relative group">
                 
-                <!-- Central Milestone Node with Elegant SVG -->
+                <!-- Central Milestone Node with Elegant Indicator -->
                 <div class="absolute left-6 lg:left-1/2 -translate-x-1/2 top-6 lg:top-8 z-20 flex items-center justify-center">
                   <div class="relative flex items-center justify-center">
                     {isCurrent && (
-                      <span class="absolute -inset-1.5 rounded-full bg-zinc-400/20 dark:bg-zinc-600/30 animate-pulse pointer-events-none"></span>
+                      <span class="absolute -inset-1.5 rounded-full bg-emerald-500/20 dark:bg-emerald-400/20 animate-pulse pointer-events-none"></span>
                     )}
-                    <div class={`w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-[#F8F8F6] dark:bg-[#0B0B0E] border-2 ${
+                    <div class={`w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-[#F8F8F6] dark:bg-[#0B0B0E] border ${
                       isCurrent 
-                        ? 'border-zinc-950 dark:border-white text-zinc-950 dark:text-white shadow-md' 
-                        : 'border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'
-                    } flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-zinc-950 dark:group-hover:border-white shadow-sm`}>
-                      <IconComponent class="w-5 h-5" />
+                        ? 'border-emerald-500/80 text-zinc-950 dark:text-zinc-50 shadow-md' 
+                        : 'border-zinc-300/80 dark:border-zinc-700/80 text-zinc-600 dark:text-zinc-400'
+                    } flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:border-zinc-950 dark:group-hover:border-white shadow-xs`}>
+                      <IconComponent class="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.75]" />
                     </div>
                     {isCurrent && (
-                      <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white dark:border-[#0B0B0E] animate-pulse"></span>
+                      <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white dark:border-[#0B0B0E] animate-pulse"></span>
                     )}
                   </div>
                 </div>
@@ -121,113 +123,229 @@ for (let i = 0; i < experience.length; i += pageSize) {
                   
                   <!-- Column 1 (Left on Desktop) -->
                   {isEven ? (
-                    /* Card on Left */
-                    <div class="space-y-4 p-6 sm:p-7 rounded-2xl bg-white/70 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all duration-300 shadow-xs">
-                      <!-- Mobile Era Tag -->
-                      <div class="flex items-center justify-between text-zinc-400 dark:text-zinc-500 lg:hidden">
-                        <span class="text-[10px] font-mono tracking-widest uppercase">ETAPA {itemNumber} //</span>
-                        <span class="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100">{exp.period}</span>
+                    /* Editorial Magazine Card on Left */
+                    <article class="relative p-6 sm:p-8 rounded-2xl bg-white/80 dark:bg-[#111114]/80 backdrop-blur-md border border-zinc-900/10 dark:border-white/10 hover:border-zinc-900/25 dark:hover:border-white/25 transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.07)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_12px_36px_rgba(0,0,0,0.4)] hover:-translate-y-0.5 space-y-5">
+                      
+                      <!-- Top Magazine Folio / Kicker Strip -->
+                      <div class="flex items-center justify-between pb-3 border-b border-zinc-900/5 dark:border-white/5">
+                        <div class="flex items-center gap-2">
+                          <span class={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-emerald-500' : 'bg-zinc-400 dark:bg-zinc-600'}`}></span>
+                          <span class="text-[10px] font-mono tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-400 font-medium">
+                            {exp.period}
+                          </span>
+                        </div>
+                        <span class="text-[10px] font-mono tracking-widest text-zinc-400 dark:text-zinc-600 font-semibold select-none">
+                          № {itemNumber}
+                        </span>
                       </div>
 
-                      <div>
-                        <h3 class="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-950 dark:text-zinc-50 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
+                      <!-- Title & Organization Header -->
+                      <div class="space-y-2">
+                        <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 leading-snug group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
                           {exp.role}
                         </h3>
-                        <p class="text-xs font-mono font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wide mt-1">
-                          {exp.company}
-                        </p>
+                        <div class="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400">
+                          <span class="w-1 h-3 bg-zinc-300 dark:bg-zinc-700 rounded-full shrink-0"></span>
+                          <p class="font-medium tracking-wide uppercase line-clamp-2">
+                            {exp.company}
+                          </p>
+                        </div>
                       </div>
 
-                      <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans">
+                      <!-- Editorial Prose Description -->
+                      <p class="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans font-normal">
                         {exp.description}
                       </p>
 
-                      <div class="pt-2 border-t border-zinc-900/10 dark:border-white/10">
-                        <span class="text-[10px] font-mono tracking-widest uppercase text-zinc-400 dark:text-zinc-500 block mb-2">
-                          STACK CLAVE //
-                        </span>
+                      <!-- Responsive Mobile Link (Visible only on mobile/tablet) -->
+                      {exp.certificateImage && (
+                        <div class="lg:hidden pt-1">
+                          <button
+                            type="button"
+                            class="cert-img-trigger inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 cursor-pointer transition-colors"
+                            data-cert-src={exp.certificateImage}
+                            data-cert-alt={exp.role}
+                          >
+                            <span>Ver certificado</span>
+                            <span aria-hidden="true">→</span>
+                          </button>
+                        </div>
+                      )}
+
+                      <!-- Key Stack / Disciplines Badges -->
+                      <div class="pt-4 border-t border-zinc-900/10 dark:border-white/10 space-y-2.5">
+                        <div class="flex items-center justify-between">
+                          <span class="text-[10px] font-mono tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-500 font-medium">
+                            COMPETENCIAS CLAVE //
+                          </span>
+                          <span class="text-[10px] font-mono text-zinc-400 dark:text-zinc-600">
+                            {exp.stack.length} ÁREAS
+                          </span>
+                        </div>
                         <div class="flex flex-wrap items-center gap-1.5">
                           {exp.stack.map((tech) => (
-                            <span class="px-2.5 py-1 rounded-lg bg-zinc-100/80 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800 text-[11px] font-mono text-zinc-800 dark:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                            <span class="px-2.5 py-1 rounded-md text-[11px] font-mono text-zinc-700 dark:text-zinc-300 bg-zinc-100/70 dark:bg-zinc-800/50 border border-zinc-200/60 dark:border-zinc-700/50 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors">
                               {tech}
                             </span>
                           ))}
                         </div>
                       </div>
-                    </div>
+
+                    </article>
                   ) : (
                     /* Big Date & Stage Headline on Left (Desktop) */
-                    <div class="hidden lg:flex flex-col justify-center items-end text-right pr-6 space-y-2 pt-6">
+                    <div class="hidden lg:flex flex-col justify-center items-end text-right pr-6 space-y-3 pt-4">
                       <div class="flex items-center gap-2">
-                        <span class="text-[10px] font-mono tracking-widest uppercase text-zinc-400 dark:text-zinc-500">
+                        <span class="text-[10px] font-mono tracking-[0.25em] uppercase text-zinc-400 dark:text-zinc-500">
                           ETAPA {itemNumber} //
                         </span>
-                        <span class="text-[10px] font-mono tracking-widest uppercase text-zinc-500 dark:text-zinc-400 font-semibold">
-                          {meta.tag}
+                        <span class="text-[10px] font-mono tracking-widest uppercase text-zinc-900 dark:text-zinc-100 font-bold px-2 py-0.5 rounded bg-zinc-200/60 dark:bg-zinc-800/60 border border-zinc-300/40 dark:border-zinc-700/40">
+                          {metaTag}
                         </span>
                       </div>
-                      <p class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-zinc-950 dark:text-zinc-50">
+                      <p class="text-4xl sm:text-5xl font-black font-mono tracking-tighter text-zinc-950 dark:text-zinc-50 leading-none">
                         {exp.period}
                       </p>
-                      <p class="text-xs font-mono text-zinc-500 max-w-xs">
-                        {meta.context}
+                      <p class="text-xs font-mono text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
+                        {metaContext}
                       </p>
+
+                      <!-- Non-invasive Thumbnail Below Stage (Desktop) -->
+                      {exp.certificateImage && (
+                        <div class="pt-2">
+                          <button
+                            type="button"
+                            class="cert-img-trigger block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
+                            data-cert-src={exp.certificateImage}
+                            data-cert-alt={exp.role}
+                            aria-label={`Ver certificado de ${exp.role}`}
+                          >
+                            <div class="w-48 h-28 overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+                              <img 
+                                src={exp.certificateImage} 
+                                alt={`Miniatura de ${exp.role}`}
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+                              />
+                            </div>
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )}
 
                   <!-- Column 2 (Right on Desktop) -->
                   {!isEven ? (
-                    /* Card on Right */
-                    <div class="space-y-4 p-6 sm:p-7 rounded-2xl bg-white/70 dark:bg-zinc-900/50 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all duration-300 shadow-xs">
-                      <!-- Mobile Era Tag -->
-                      <div class="flex items-center justify-between text-zinc-400 dark:text-zinc-500 lg:hidden">
-                        <span class="text-[10px] font-mono tracking-widest uppercase">ETAPA {itemNumber} //</span>
-                        <span class="text-xs font-mono font-bold text-zinc-900 dark:text-zinc-100">{exp.period}</span>
+                    /* Editorial Magazine Card on Right */
+                    <article class="relative p-6 sm:p-8 rounded-2xl bg-white/80 dark:bg-[#111114]/80 backdrop-blur-md border border-zinc-900/10 dark:border-white/10 hover:border-zinc-900/25 dark:hover:border-white/25 transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.07)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_12px_36px_rgba(0,0,0,0.4)] hover:-translate-y-0.5 space-y-5">
+                      
+                      <!-- Top Magazine Folio / Kicker Strip -->
+                      <div class="flex items-center justify-between pb-3 border-b border-zinc-900/5 dark:border-white/5">
+                        <div class="flex items-center gap-2">
+                          <span class={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-emerald-500' : 'bg-zinc-400 dark:bg-zinc-600'}`}></span>
+                          <span class="text-[10px] font-mono tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-400 font-medium">
+                            {exp.period}
+                          </span>
+                        </div>
+                        <span class="text-[10px] font-mono tracking-widest text-zinc-400 dark:text-zinc-600 font-semibold select-none">
+                          № {itemNumber}
+                        </span>
                       </div>
 
-                      <div>
-                        <h3 class="text-xl sm:text-2xl font-black uppercase tracking-tight text-zinc-950 dark:text-zinc-50 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
+                      <!-- Title & Organization Header -->
+                      <div class="space-y-2">
+                        <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 leading-snug group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
                           {exp.role}
                         </h3>
-                        <p class="text-xs font-mono font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wide mt-1">
-                          {exp.company}
-                        </p>
+                        <div class="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400">
+                          <span class="w-1 h-3 bg-zinc-300 dark:bg-zinc-700 rounded-full shrink-0"></span>
+                          <p class="font-medium tracking-wide uppercase line-clamp-2">
+                            {exp.company}
+                          </p>
+                        </div>
                       </div>
 
-                      <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans">
+                      <!-- Editorial Prose Description -->
+                      <p class="text-[13px] sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans font-normal">
                         {exp.description}
                       </p>
 
-                      <div class="pt-2 border-t border-zinc-900/10 dark:border-white/10">
-                        <span class="text-[10px] font-mono tracking-widest uppercase text-zinc-400 dark:text-zinc-500 block mb-2">
-                          STACK CLAVE //
-                        </span>
+                      <!-- Responsive Mobile Link (Visible only on mobile/tablet) -->
+                      {exp.certificateImage && (
+                        <div class="lg:hidden pt-1">
+                          <button
+                            type="button"
+                            class="cert-img-trigger inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 cursor-pointer transition-colors"
+                            data-cert-src={exp.certificateImage}
+                            data-cert-alt={exp.role}
+                          >
+                            <span>Ver certificado</span>
+                            <span aria-hidden="true">→</span>
+                          </button>
+                        </div>
+                      )}
+
+                      <!-- Key Stack / Disciplines Badges -->
+                      <div class="pt-4 border-t border-zinc-900/10 dark:border-white/10 space-y-2.5">
+                        <div class="flex items-center justify-between">
+                          <span class="text-[10px] font-mono tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-500 font-medium">
+                            COMPETENCIAS CLAVE //
+                          </span>
+                          <span class="text-[10px] font-mono text-zinc-400 dark:text-zinc-600">
+                            {exp.stack.length} ÁREAS
+                          </span>
+                        </div>
                         <div class="flex flex-wrap items-center gap-1.5">
                           {exp.stack.map((tech) => (
-                            <span class="px-2.5 py-1 rounded-lg bg-zinc-100/80 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800 text-[11px] font-mono text-zinc-800 dark:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                            <span class="px-2.5 py-1 rounded-md text-[11px] font-mono text-zinc-700 dark:text-zinc-300 bg-zinc-100/70 dark:bg-zinc-800/50 border border-zinc-200/60 dark:border-zinc-700/50 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors">
                               {tech}
                             </span>
                           ))}
                         </div>
                       </div>
-                    </div>
+
+                    </article>
                   ) : (
                     /* Big Date & Stage Headline on Right (Desktop) */
-                    <div class="hidden lg:flex flex-col justify-center pl-6 space-y-2 pt-6">
+                    <div class="hidden lg:flex flex-col justify-center pl-6 space-y-3 pt-4">
                       <div class="flex items-center gap-2">
-                        <span class="text-[10px] font-mono tracking-widest uppercase text-zinc-400 dark:text-zinc-500">
+                        <span class="text-[10px] font-mono tracking-[0.25em] uppercase text-zinc-400 dark:text-zinc-500">
                           ETAPA {itemNumber} //
                         </span>
-                        <span class="text-[10px] font-mono tracking-widest uppercase text-zinc-500 dark:text-zinc-400 font-semibold">
-                          {meta.tag}
+                        <span class="text-[10px] font-mono tracking-widest uppercase text-zinc-900 dark:text-zinc-100 font-bold px-2 py-0.5 rounded bg-zinc-200/60 dark:bg-zinc-800/60 border border-zinc-300/40 dark:border-zinc-700/40">
+                          {metaTag}
                         </span>
                       </div>
-                      <p class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-zinc-950 dark:text-zinc-50">
+                      <p class="text-4xl sm:text-5xl font-black font-mono tracking-tighter text-zinc-950 dark:text-zinc-50 leading-none">
                         {exp.period}
                       </p>
-                      <p class="text-xs font-mono text-zinc-500 max-w-xs">
-                        {meta.context}
+                      <p class="text-xs font-mono text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
+                        {metaContext}
                       </p>
+
+                      <!-- Non-invasive Thumbnail Below Stage (Desktop) -->
+                      {exp.certificateImage && (
+                        <div class="pt-2">
+                          <button
+                            type="button"
+                            class="cert-img-trigger block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
+                            data-cert-src={exp.certificateImage}
+                            data-cert-alt={exp.role}
+                            aria-label={`Ver certificado de ${exp.role}`}
+                          >
+                            <div class="w-48 h-28 overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+                              <img 
+                                src={exp.certificateImage} 
+                                alt={`Miniatura de ${exp.role}`}
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+                              />
+                            </div>
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -303,106 +421,194 @@ for (let i = 0; i < experience.length; i += pageSize) {
     </div>
   </div>
 
+  <!-- Pure Image Lightbox Modal (Sin textos ni tarjetas, solo imagen completa con botón de cierre claro) -->
+  <div 
+    id="pure-image-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-200"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Visor de certificado"
+  >
+    <!-- Botón de cierre visible y accesible -->
+    <button 
+      id="pure-image-modal-close"
+      type="button"
+      aria-label="Cerrar certificado"
+      class="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 p-2.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-white border border-white/20 transition-all cursor-pointer shadow-xl hover:scale-110 active:scale-95"
+    >
+      <X class="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" />
+    </button>
+
+    <!-- Imagen completa centrada -->
+    <div class="relative max-w-full max-h-full flex items-center justify-center pointer-events-auto">
+      <img 
+        id="pure-image-modal-img"
+        src="" 
+        alt="Certificado en tamaño completo"
+        class="max-w-[94vw] max-h-[88vh] object-contain rounded-xl shadow-2xl border border-white/15 select-none transition-transform duration-200 scale-95"
+      />
+    </div>
+  </div>
+
 </section>
 
 <script>
   function setupTimelinePagination() {
+    // 1. Pagination Logic
     const prevBtn = document.getElementById('timeline-prev-btn') as HTMLButtonElement | null;
     const nextBtn = document.getElementById('timeline-next-btn') as HTMLButtonElement | null;
     const currentPageLabel = document.getElementById('timeline-current-page');
     const pillBtns = document.querySelectorAll<HTMLButtonElement>('[data-timeline-page-btn]');
     const pageSlides = document.querySelectorAll<HTMLElement>('.timeline-page-slide');
 
-    if (!prevBtn || !nextBtn || pageSlides.length <= 1) return;
-    if (prevBtn.hasAttribute('data-bound')) return;
-    prevBtn.setAttribute('data-bound', 'true');
+    if (prevBtn && nextBtn && pageSlides.length > 1 && !prevBtn.hasAttribute('data-bound')) {
+      prevBtn.setAttribute('data-bound', 'true');
 
-    let activeIndex = 0;
-    const totalPages = pageSlides.length;
-    let isAnimating = false;
+      let activeIndex = 0;
+      const totalPages = pageSlides.length;
+      let isAnimating = false;
 
-    function updateUI(newIndex: number, direction: 'next' | 'prev') {
-      if (newIndex === activeIndex || isAnimating) return;
-      isAnimating = true;
+      function updateUI(newIndex: number, direction: 'next' | 'prev') {
+        if (newIndex === activeIndex || isAnimating) return;
+        isAnimating = true;
 
-      const currentSlide = pageSlides[activeIndex];
-      const nextSlide = pageSlides[newIndex];
+        const currentSlide = pageSlides[activeIndex];
+        const nextSlide = pageSlides[newIndex];
 
-      // 1. Current slide fades out and drifts horizontally
-      currentSlide.classList.remove('opacity-100', 'translate-x-0', 'relative', 'pointer-events-auto');
-      currentSlide.classList.add(
-        'opacity-0', 
-        direction === 'next' ? '-translate-x-8' : 'translate-x-8', 
-        'absolute', 
-        'inset-0', 
-        'pointer-events-none'
-      );
+        currentSlide.classList.remove('opacity-100', 'translate-x-0', 'relative', 'pointer-events-auto');
+        currentSlide.classList.add(
+          'opacity-0', 
+          direction === 'next' ? '-translate-x-8' : 'translate-x-8', 
+          'absolute', 
+          'inset-0', 
+          'pointer-events-none'
+        );
 
-      // 2. Prepare target slide incoming position
-      nextSlide.classList.remove('hidden');
-      nextSlide.classList.remove('translate-x-0', '-translate-x-8', 'translate-x-8');
-      nextSlide.classList.add(
-        direction === 'next' ? 'translate-x-8' : '-translate-x-8',
-        'opacity-0',
-        'absolute',
-        'inset-0'
-      );
+        nextSlide.classList.remove('hidden');
+        nextSlide.classList.remove('translate-x-0', '-translate-x-8', 'translate-x-8');
+        nextSlide.classList.add(
+          direction === 'next' ? 'translate-x-8' : '-translate-x-8',
+          'opacity-0',
+          'absolute',
+          'inset-0'
+        );
 
-      // 3. Trigger transition into place
-      setTimeout(() => {
-        currentSlide.classList.add('hidden');
-        currentSlide.classList.remove('-translate-x-8', 'translate-x-8');
+        setTimeout(() => {
+          currentSlide.classList.add('hidden');
+          currentSlide.classList.remove('-translate-x-8', 'translate-x-8');
 
-        nextSlide.classList.remove('absolute', 'inset-0', 'pointer-events-none');
-        nextSlide.classList.add('relative', 'pointer-events-auto');
+          nextSlide.classList.remove('absolute', 'inset-0', 'pointer-events-none');
+          nextSlide.classList.add('relative', 'pointer-events-auto');
 
-        requestAnimationFrame(() => {
-          nextSlide.classList.remove('translate-x-8', '-translate-x-8', 'opacity-0');
-          nextSlide.classList.add('translate-x-0', 'opacity-100');
-        });
+          requestAnimationFrame(() => {
+            nextSlide.classList.remove('translate-x-8', '-translate-x-8', 'opacity-0');
+            nextSlide.classList.add('translate-x-0', 'opacity-100');
+          });
 
-        activeIndex = newIndex;
+          activeIndex = newIndex;
 
-        // Update labels & pills
-        if (currentPageLabel) {
-          currentPageLabel.textContent = String(activeIndex + 1).padStart(2, '0');
-        }
-
-        pillBtns.forEach((pill, idx) => {
-          if (idx === activeIndex) {
-            pill.className = 'timeline-pill-btn active-pill px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer bg-zinc-950 dark:bg-zinc-100 text-white dark:text-zinc-950 shadow-xs';
-          } else {
-            pill.className = 'timeline-pill-btn px-3 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800';
+          if (currentPageLabel) {
+            currentPageLabel.textContent = String(activeIndex + 1).padStart(2, '0');
           }
-        });
 
-        // Update button states
-        prevBtn.disabled = activeIndex === 0;
-        nextBtn.disabled = activeIndex === totalPages - 1;
+          pillBtns.forEach((pill, idx) => {
+            if (idx === activeIndex) {
+              pill.className = 'timeline-pill-btn active-pill px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer bg-zinc-950 dark:bg-zinc-100 text-white dark:text-zinc-950 shadow-xs';
+            } else {
+              pill.className = 'timeline-pill-btn px-3 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800';
+            }
+          });
 
-        isAnimating = false;
-      }, 260);
-    }
+          prevBtn.disabled = activeIndex === 0;
+          nextBtn.disabled = activeIndex === totalPages - 1;
 
-    prevBtn.addEventListener('click', () => {
-      if (activeIndex > 0) {
-        updateUI(activeIndex - 1, 'prev');
+          isAnimating = false;
+        }, 260);
       }
-    });
 
-    nextBtn.addEventListener('click', () => {
-      if (activeIndex < totalPages - 1) {
-        updateUI(activeIndex + 1, 'next');
-      }
-    });
-
-    pillBtns.forEach((pill) => {
-      pill.addEventListener('click', () => {
-        const targetIdx = Number(pill.getAttribute('data-timeline-page-btn'));
-        if (targetIdx !== activeIndex) {
-          updateUI(targetIdx, targetIdx > activeIndex ? 'next' : 'prev');
+      prevBtn.addEventListener('click', () => {
+        if (activeIndex > 0) {
+          updateUI(activeIndex - 1, 'prev');
         }
       });
+
+      nextBtn.addEventListener('click', () => {
+        if (activeIndex < totalPages - 1) {
+          updateUI(activeIndex + 1, 'next');
+        }
+      });
+
+      pillBtns.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          const targetIdx = Number(pill.getAttribute('data-timeline-page-btn'));
+          if (targetIdx !== activeIndex) {
+            updateUI(targetIdx, targetIdx > activeIndex ? 'next' : 'prev');
+          }
+        });
+      });
+    }
+
+    // 2. Pure Image Lightbox Modal Logic
+    const modal = document.getElementById('pure-image-modal');
+    const modalImg = document.getElementById('pure-image-modal-img') as HTMLImageElement | null;
+    const modalClose = document.getElementById('pure-image-modal-close');
+    const triggers = document.querySelectorAll<HTMLElement>('.cert-img-trigger');
+
+    if (!modal || !modalImg || modal.hasAttribute('data-bound')) return;
+    modal.setAttribute('data-bound', 'true');
+
+    function openModal(src: string, alt: string) {
+      if (!modal || !modalImg) return;
+      modalImg.src = src;
+      modalImg.alt = alt || 'Certificado completo';
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100', 'pointer-events-auto');
+      modalImg.classList.remove('scale-95');
+      modalImg.classList.add('scale-100');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      if (!modal || !modalImg) return;
+      modal.classList.remove('opacity-100', 'pointer-events-auto');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalImg.classList.remove('scale-100');
+      modalImg.classList.add('scale-95');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        if (modalImg) modalImg.src = '';
+      }, 200);
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const src = trigger.getAttribute('data-cert-src');
+        const alt = trigger.getAttribute('data-cert-alt') || '';
+        if (src) {
+          openModal(src, alt);
+        }
+      });
+    });
+
+    if (modalClose) {
+      modalClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeModal();
+      });
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
     });
   }
 

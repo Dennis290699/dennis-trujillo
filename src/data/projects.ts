@@ -271,17 +271,121 @@ export const SKILLS: SkillGroup[] = [
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    period: '2023 — Presente',
-    role: 'Desarrollador Full Stack & Diseñador de Software',
-    company: 'Proyectos de Ingeniería & Desarrollo Independiente',
-    description: 'Diseño y construcción de arquitecturas web modernas con Astro, React, Next.js y ecosistemas de inteligencia artificial y Big Data con Apache Spark y Docker.',
-    stack: ['Astro', 'React', 'Next.js', 'Node.js', 'TensorFlow.js', 'Docker', 'Apache Spark']
+    period: 'Presente',
+    role: 'Estudiante de Último Semestre — Carrera de Computación',
+    company: 'Facultad de Ingeniería y Ciencias Aplicadas (FICA) · Universidad Central del Ecuador',
+    description: 'Estudiante de último semestre en la Carrera de Computación. Formación académica integral en ciencias de la computación, arquitectura de software, sistemas distribuidos, algoritmos complejos, computación gráfica e inteligencia artificial aplicada al desarrollo de soluciones en producción.',
+    stack: ['Ciencias de la Computación', 'Ingeniería de Software', 'Sistemas Distribuidos', 'Algoritmos & Estructuras de Datos', 'Inteligencia Artificial', 'Computación Gráfica'],
+    tag: 'ETAPA ACTUAL // FORMACIÓN UNIVERSITARIA',
+    context: 'Facultad de Ingeniería y Ciencias Aplicadas (FICA) · Carrera de Computación.'
+  },
+  {
+    period: 'Septiembre de 2026',
+    role: 'Fundamentos de AWS: Cloud, Serverless y Operación',
+    company: 'Commit Academy',
+    description: 'Especialización en arquitectura y despliegue de infraestructura en la nube sobre Amazon Web Services (AWS). Implementación de arquitecturas desacopladas Serverless, aprovisionamiento escalable y mejores prácticas en operaciones cloud.',
+    stack: ['AWS', 'Cloud Computing', 'Serverless', 'Cloud Operations', 'Infraestructura Cloud'],
+    tag: 'CLOUD & SERVERLESS // CERTIFICACIÓN OFICIAL',
+    context: 'Infraestructura cloud en AWS, arquitecturas serverless y despliegue desacoplado.',
+    certificateImage: '/certs/cert_QM4dveLRJk.webp'
+  },
+  {
+    period: 'Septiembre de 2026',
+    role: 'Curso de Iniciación a la IA (El Nuevo ChatGPT)',
+    company: 'BIG school',
+    description: 'Formación intensiva enfocada en la optimización de flujos de trabajo de ingeniería utilizando ChatGPT y modelos de lenguaje avanzados, formulación de prompts estructurados y automatización de procesos operativos.',
+    stack: ['Inteligencia Artificial', 'ChatGPT', 'Prompt Engineering', 'Automatización de Flujos'],
+    tag: 'IA APLICADA // OPTIMIZACIÓN DE FLUJOS',
+    context: 'Integración de modelos LLM, ingeniería de prompts y optimización operativa.',
+    certificateImage: '/certs/Certificado-Dennis-Trujillo-Vistin-qx6uktnh.webp'
+  },
+  {
+    period: 'Julio de 2026',
+    role: 'Curso Básico de Inteligencia Artificial Generativa',
+    company: 'Universidad Central del Ecuador (UCE)',
+    description: 'Certificación oficial de 40 horas académicas emitida por la Universidad Central del Ecuador. Formación teórico-práctica en fundamentos matemáticos, modelos generativos, arquitecturas Transformer y aplicaciones empresariales de IA Generativa.',
+    stack: ['IA Generativa', 'Modelos Transformer', 'Deep Learning', 'LLMs', 'Fundamentos Teóricos'],
+    tag: 'ACREDITACIÓN OFICIAL // 40 HORAS ACADÉMICAS',
+    context: 'Formación académica en modelos generativos, redes neuronales y Transformers.',
+    certificateImage: '/certs/3273_TRUJILLO VISTIN_1805372081-signed-signed.webp'
+  },
+  {
+    period: 'Junio de 2026',
+    role: 'Iniciación al Desarrollo con IA: Programa con Agentes',
+    company: 'BIG school',
+    description: 'Jornadas técnicas de especialización en el desarrollo de software integrando agentes autónomos de Inteligencia Artificial, razonamiento guiado y conexión mediante herramientas y APIs.',
+    stack: ['Agentes de IA', 'Desarrollo de Software', 'Tool Calling', 'Integración de APIs', 'Automatización'],
+    tag: 'AGENTES DE IA // DESARROLLO DE SOFTWARE',
+    context: 'Programación asistida, sistemas agénticos autónomos y ejecución de tareas.',
+    certificateImage: '/certs/Certificado-Dennis-Trujillo-Vistin-cvklznem.webp'
+  },
+  {
+    period: 'Mayo de 2026',
+    role: 'Curso de IA: De 0 a Agentes Autónomos',
+    company: 'BIG school',
+    description: 'Formación especializada en el diseño y arquitectura de agentes de Inteligencia Artificial, automatización de tareas complejas, memoria contextual y aplicación práctica en flujos de trabajo.',
+    stack: ['Agentes de IA', 'Automatización de Tareas', 'Memoria Contextual', 'IA Aplicada'],
+    tag: 'ARQUITECTURA AGÉNTICA // AUTOMATIZACIÓN',
+    context: 'Diseño de agentes de IA, memoria contextual y automatización de procesos.',
+    certificateImage: '/certs/Certificado-Dennis-Trujillo-Vistin-ck4blv7t.webp'
+  },
+  {
+    period: 'Mayo de 2026',
+    role: 'Curso de SEO Técnico para IA y Google (GEO)',
+    company: 'BIG school',
+    description: 'Capacitación en posicionamiento web (SEO) técnico avanzado optimizado para el algoritmo de Google y nuevos motores de búsqueda basados en IA (GEO). Estructuración semántica, indexabilidad y optimización de rendimiento.',
+    stack: ['SEO Técnico', 'GEO (Generative Engine Optimization)', 'Semántica Web', 'Core Web Vitals'],
+    tag: 'SEO TÉCNICO & GEO // MOTORES DE IA',
+    context: 'Posicionamiento en Google y motores de búsqueda generativa (GEO).',
+    certificateImage: '/certs/Certificado-Dennis-Trujillo-Vistin-njxohgld.webp'
+  },
+  {
+    period: 'Abril de 2026',
+    role: 'Curso de Ciberseguridad y Hacking Ético',
+    company: 'BIG school',
+    description: 'Formación técnica en metodologías de detección de vulnerabilidades, auditoría de seguridad informática en aplicaciones web, conceptos de ethical hacking y directrices de defensa digital.',
+    stack: ['Ciberseguridad', 'Hacking Ético', 'Análisis de Vulnerabilidades', 'OWASP', 'Defensa Digital'],
+    tag: 'CIBERSEGURIDAD // HACKING ÉTICO & DEFENSE',
+    context: 'Detección de vulnerabilidades, seguridad perimetral y hacking ético.',
+    certificateImage: '/certs/Certificado-Dennis-Trujillo-Vistin-nw4qhqup.webp'
+  },
+  {
+    period: 'Marzo de 2026',
+    role: 'Desarrollo con IA: De 0 a Producción',
+    company: 'BIG school',
+    description: 'Orientado a la integración de Inteligencia Artificial en todo el ciclo de vida del desarrollo de software (SDLC), desde la concepción arquitectónica hasta el pase controlado a producción.',
+    stack: ['Desarrollo con IA', 'Ciclo SDLC', 'Paso a Producción', 'CI/CD', 'Arquitectura de Software'],
+    tag: 'CICLO DE VIDA (SDLC) // PRODUCCIÓN CON IA',
+    context: 'Integración end-to-end de modelos de IA desde la arquitectura a producción.',
+    certificateImage: '/certs/Certificado-Dennis-Trujillo-Vistin-a4vo94xe.webp'
+  },
+  {
+    period: 'Octubre de 2025',
+    role: 'Domina la IA con Google Gemini',
+    company: 'Santander Open Academy (Contenido oficial de Google)',
+    description: 'Certificación con contenido oficial desarrollado por Google enfocada en el dominio, prompt engineering avanzado y aplicación práctica de la inteligencia artificial multimodal Google Gemini.',
+    stack: ['Google Gemini', 'Modelos Multimodales', 'Prompt Engineering', 'Google Cloud AI'],
+    tag: 'ACREDITACIÓN GOOGLE // IA MULTIMODAL',
+    context: 'Ecosistema multimodal Gemini, prompt engineering y servicios de Google.',
+    certificateImage: '/certs/2828_trujilloadrian29@gmail.com.webp'
+  },
+  {
+    period: 'Octubre de 2025',
+    role: 'Curso de Iniciación al Desarrollo con IA',
+    company: 'BIG school',
+    description: 'Certificado de asistencia a jornadas formativas enfocado en la introducción e integración de modelos de Inteligencia Artificial en el desarrollo de software y flujos de trabajo de ingeniería.',
+    stack: ['Desarrollo con IA', 'Modelos de Lenguaje', 'Programación Asistida', 'Software Engineering'],
+    tag: 'INICIOS IA // DESARROLLO BASE',
+    context: 'Introducción a la aplicación de modelos de IA en la ingeniería de software.',
+    certificateImage: '/certs/Dennis _trujilloadrian29@gmail.com.webp'
   },
   {
     period: '2022 — 2023',
     role: 'Desarrollador de Computación Gráfica & Videojuegos',
-    company: 'Proyectos Universitarios Avanzados (UCE)',
+    company: 'Proyectos Universitarios Avanzados (FICA · UCE)',
     description: 'Implementación de pipeline gráfico tridimensional por software (LuminaFX) en Java y desarrollo del videojuego indie 2.5D Chronicles of the Cursed Knight en Unity 6 con gestión de assets por Git LFS.',
-    stack: ['Unity 6', 'C#', 'Java', 'Git LFS', 'Computer Graphics', 'GitHub Actions']
+    stack: ['Unity 6', 'C#', 'Java', 'Git LFS', 'Computer Graphics', 'GitHub Actions'],
+    tag: 'COMPUTACIÓN GRÁFICA // SISTEMAS & MOTOR',
+    context: 'Pipeline gráfico por software en Java y desarrollo de videojuegos en Unity 6.'
   }
 ];
