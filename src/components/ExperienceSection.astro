@@ -158,17 +158,30 @@ for (let i = 0; i < experience.length; i += pageSize) {
                       </p>
 
                       <!-- Responsive Mobile Link (Visible only on mobile/tablet) -->
-                      {exp.certificateImage && (
-                        <div class="lg:hidden pt-1">
-                          <button
-                            type="button"
-                            class="cert-img-trigger inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 cursor-pointer transition-colors"
-                            data-cert-src={exp.certificateImage}
-                            data-cert-alt={exp.role}
-                          >
-                            <span>Ver certificado</span>
-                            <span aria-hidden="true">→</span>
-                          </button>
+                      {(exp.certificateImage || exp.badgeImage) && (
+                        <div class="lg:hidden pt-1 flex flex-wrap items-center gap-4">
+                          {exp.certificateImage && (
+                            <button
+                              type="button"
+                              class="cert-img-trigger inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 cursor-pointer transition-colors"
+                              data-cert-src={exp.certificateImage}
+                              data-cert-alt={exp.role}
+                            >
+                              <span>Ver certificado</span>
+                              <span aria-hidden="true">→</span>
+                            </button>
+                          )}
+                          {exp.badgeImage && (
+                            <button
+                              type="button"
+                              class="cert-img-trigger inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 cursor-pointer transition-colors"
+                              data-cert-src={exp.badgeImage}
+                              data-cert-alt={`Insignia ${exp.role}`}
+                            >
+                              <span>Ver insignia oficial</span>
+                              <span aria-hidden="true">→</span>
+                            </button>
+                          )}
                         </div>
                       )}
 
@@ -211,25 +224,44 @@ for (let i = 0; i < experience.length; i += pageSize) {
                       </p>
 
                       <!-- Non-invasive Thumbnail Below Stage (Desktop) -->
-                      {exp.certificateImage && (
-                        <div class="pt-2">
-                          <button
-                            type="button"
-                            class="cert-img-trigger block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
-                            data-cert-src={exp.certificateImage}
-                            data-cert-alt={exp.role}
-                            aria-label={`Ver certificado de ${exp.role}`}
-                          >
-                            <div class="w-48 h-28 overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+                      {(exp.certificateImage || exp.badgeImage) && (
+                        <div class="pt-2 flex flex-wrap items-center justify-end gap-3">
+                          {exp.certificateImage && (
+                            <button
+                              type="button"
+                              class="cert-img-trigger block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
+                              data-cert-src={exp.certificateImage}
+                              data-cert-alt={exp.role}
+                              aria-label={`Ver certificado de ${exp.role}`}
+                            >
+                              <div class="w-48 h-28 overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+                                <img 
+                                  src={exp.certificateImage} 
+                                  alt={`Miniatura de ${exp.role}`}
+                                  loading="lazy"
+                                  decoding="async"
+                                  class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+                                />
+                              </div>
+                            </button>
+                          )}
+                          {exp.badgeImage && (
+                            <button
+                              type="button"
+                              class="cert-img-trigger relative flex items-center justify-center w-26 h-28 cursor-pointer hover:scale-105 transition-transform duration-300 ease-out focus:outline-none"
+                              data-cert-src={exp.badgeImage}
+                              data-cert-alt={`Insignia oficial de ${exp.role}`}
+                              aria-label={`Ver insignia oficial de ${exp.role}`}
+                            >
                               <img 
-                                src={exp.certificateImage} 
-                                alt={`Miniatura de ${exp.role}`}
+                                src={exp.badgeImage} 
+                                alt={`Insignia de ${exp.role}`}
                                 loading="lazy"
                                 decoding="async"
-                                class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+                                class="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.18)] dark:drop-shadow-[0_6px_22px_rgba(255,255,255,0.14)] filter transition-transform duration-300 ease-out cursor-pointer select-none"
                               />
-                            </div>
-                          </button>
+                            </button>
+                          )}
                         </div>
                       )}
                     </div>
@@ -272,17 +304,30 @@ for (let i = 0; i < experience.length; i += pageSize) {
                       </p>
 
                       <!-- Responsive Mobile Link (Visible only on mobile/tablet) -->
-                      {exp.certificateImage && (
-                        <div class="lg:hidden pt-1">
-                          <button
-                            type="button"
-                            class="cert-img-trigger inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 cursor-pointer transition-colors"
-                            data-cert-src={exp.certificateImage}
-                            data-cert-alt={exp.role}
-                          >
-                            <span>Ver certificado</span>
-                            <span aria-hidden="true">→</span>
-                          </button>
+                      {(exp.certificateImage || exp.badgeImage) && (
+                        <div class="lg:hidden pt-1 flex flex-wrap items-center gap-4">
+                          {exp.certificateImage && (
+                            <button
+                              type="button"
+                              class="cert-img-trigger inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 cursor-pointer transition-colors"
+                              data-cert-src={exp.certificateImage}
+                              data-cert-alt={exp.role}
+                            >
+                              <span>Ver certificado</span>
+                              <span aria-hidden="true">→</span>
+                            </button>
+                          )}
+                          {exp.badgeImage && (
+                            <button
+                              type="button"
+                              class="cert-img-trigger inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 cursor-pointer transition-colors"
+                              data-cert-src={exp.badgeImage}
+                              data-cert-alt={`Insignia ${exp.role}`}
+                            >
+                              <span>Ver insignia oficial</span>
+                              <span aria-hidden="true">→</span>
+                            </button>
+                          )}
                         </div>
                       )}
 
@@ -325,25 +370,44 @@ for (let i = 0; i < experience.length; i += pageSize) {
                       </p>
 
                       <!-- Non-invasive Thumbnail Below Stage (Desktop) -->
-                      {exp.certificateImage && (
-                        <div class="pt-2">
-                          <button
-                            type="button"
-                            class="cert-img-trigger block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
-                            data-cert-src={exp.certificateImage}
-                            data-cert-alt={exp.role}
-                            aria-label={`Ver certificado de ${exp.role}`}
-                          >
-                            <div class="w-48 h-28 overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+                      {(exp.certificateImage || exp.badgeImage) && (
+                        <div class="pt-2 flex flex-wrap items-center justify-start gap-3">
+                          {exp.certificateImage && (
+                            <button
+                              type="button"
+                              class="cert-img-trigger block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
+                              data-cert-src={exp.certificateImage}
+                              data-cert-alt={exp.role}
+                              aria-label={`Ver certificado de ${exp.role}`}
+                            >
+                              <div class="w-48 h-28 overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+                                <img 
+                                  src={exp.certificateImage} 
+                                  alt={`Miniatura de ${exp.role}`}
+                                  loading="lazy"
+                                  decoding="async"
+                                  class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+                                />
+                              </div>
+                            </button>
+                          )}
+                          {exp.badgeImage && (
+                            <button
+                              type="button"
+                              class="cert-img-trigger relative flex items-center justify-center w-26 h-28 cursor-pointer hover:scale-105 transition-transform duration-300 ease-out focus:outline-none"
+                              data-cert-src={exp.badgeImage}
+                              data-cert-alt={`Insignia oficial de ${exp.role}`}
+                              aria-label={`Ver insignia oficial de ${exp.role}`}
+                            >
                               <img 
-                                src={exp.certificateImage} 
-                                alt={`Miniatura de ${exp.role}`}
+                                src={exp.badgeImage} 
+                                alt={`Insignia de ${exp.role}`}
                                 loading="lazy"
                                 decoding="async"
-                                class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+                                class="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.18)] dark:drop-shadow-[0_6px_22px_rgba(255,255,255,0.14)] filter transition-transform duration-300 ease-out cursor-pointer select-none"
                               />
-                            </div>
-                          </button>
+                            </button>
+                          )}
                         </div>
                       )}
                     </div>
@@ -562,10 +626,19 @@ for (let i = 0; i < experience.length; i += pageSize) {
       modalImg.src = src;
       modalImg.alt = alt || 'Certificado completo';
 
+      const isBadge = src.toLowerCase().endsWith('.png') || src.toLowerCase().includes('badge');
+      if (isBadge) {
+        modalImg.className = 'max-w-[85vw] max-h-[75vh] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.6)] select-none transition-transform duration-200 scale-95';
+      } else {
+        modalImg.className = 'max-w-[94vw] max-h-[88vh] object-contain rounded-xl shadow-2xl border border-white/15 select-none transition-transform duration-200 scale-95';
+      }
+
       modal.classList.remove('opacity-0', 'pointer-events-none');
       modal.classList.add('opacity-100', 'pointer-events-auto');
-      modalImg.classList.remove('scale-95');
-      modalImg.classList.add('scale-100');
+      requestAnimationFrame(() => {
+        modalImg.classList.remove('scale-95');
+        modalImg.classList.add('scale-100');
+      });
       document.body.style.overflow = 'hidden';
     }
 

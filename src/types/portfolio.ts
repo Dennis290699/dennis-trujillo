@@ -39,4 +39,5 @@ export interface ExperienceItem {
   tag?: string;
   context?: string;
   certificateImage?: string;
+  badgeImage?: string;
 }

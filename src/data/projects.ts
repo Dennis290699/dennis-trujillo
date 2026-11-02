@@ -280,6 +280,17 @@ export const EXPERIENCE: ExperienceItem[] = [
     context: 'Facultad de Ingeniería y Ciencias Aplicadas (FICA) · Carrera de Computación.'
   },
   {
+    period: 'Noviembre de 2026',
+    role: 'AWS Academy Graduate — AWS Academy Cloud Foundations',
+    company: 'Amazon Web Services (AWS) Academy',
+    description: 'Acreditación oficial emitida por AWS Academy que valida conocimientos fundamentales en computación en la nube: arquitectura e infraestructura global de AWS, servicios centrales (EC2, S3, RDS, VPC, Lambda), modelo de responsabilidad compartida, seguridad y gobernanza en la nube, optimización de costos y soporte técnico.',
+    stack: ['AWS Cloud', 'AWS Academy', 'Cloud Architecture', 'Seguridad en AWS', 'IAM & VPC', 'Serverless & Cómputo', 'Cloud Economics'],
+    tag: 'AWS ACADEMY GRADUATE // CLOUD FOUNDATIONS',
+    context: 'Acreditación oficial y Digital Badge emitida por AWS Academy.',
+    certificateImage: '/certs/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20261102-20-wc4w19.webp',
+    badgeImage: '/certs/aws-academy-graduate-cloud-foundations-training-bad.png'
+  },
+  {
     period: 'Septiembre de 2026',
     role: 'Fundamentos de AWS: Cloud, Serverless y Operación',
     company: 'Commit Academy',
