@@ -474,6 +474,120 @@ for (let i = 0; i < experience.length; i += pageSize) {
 
   </div>
 
+  <!-- Featured Credentials Showcase Strip (Acreditaciones Destacadas) -->
+  <div class="pt-6 pb-2 space-y-4 border-t border-zinc-900/15 dark:border-white/15">
+    
+    <!-- Editorial Shelf Kicker Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+        <h3 class="text-[11px] font-mono tracking-[0.25em] uppercase text-zinc-900 dark:text-zinc-100 font-bold">
+          CREDENCIALES DESTACADAS // TOP ACREDITACIONES
+        </h3>
+      </div>
+      <p class="text-[10px] font-mono tracking-wider uppercase text-zinc-400 dark:text-zinc-500">
+        SELECCIÓN DE MAYOR PESO TÉCNICO · CLIC PARA AMPLIAR
+      </p>
+    </div>
+
+    <!-- Line of Featured Images -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 lg:gap-6 items-start pt-1">
+      
+      <!-- 01: Noviembre de 2026 — AWS Academy Graduate (Certificado + Insignia) -->
+      <div class="space-y-2">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <button
+            type="button"
+            class="cert-img-trigger flex-1 h-28 sm:h-32 block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
+            data-cert-src="/certs/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20261102-20-wc4w19.webp"
+            data-cert-alt="AWS Academy Graduate — AWS Academy Cloud Foundations"
+            aria-label="Ver certificado destacado: AWS Academy Graduate"
+          >
+            <div class="w-full h-full overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+              <img 
+                src="/certs/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20261102-20-wc4w19.webp" 
+                alt="Certificado AWS Academy Graduate"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+              />
+            </div>
+          </button>
+
+          <!-- Insignia oficial transparente flotante -->
+          <button
+            type="button"
+            class="cert-img-trigger relative flex items-center justify-center w-22 sm:w-26 h-28 sm:h-32 shrink-0 cursor-pointer hover:scale-110 transition-transform duration-300 ease-out focus:outline-none"
+            data-cert-src="/certs/aws-academy-graduate-cloud-foundations-training-bad.png"
+            data-cert-alt="Insignia oficial AWS Academy Graduate"
+            aria-label="Ver insignia destacada: AWS Academy Graduate"
+          >
+            <img 
+              src="/certs/aws-academy-graduate-cloud-foundations-training-bad.png" 
+              alt="Insignia AWS Academy Graduate"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.18)] dark:drop-shadow-[0_6px_22px_rgba(255,255,255,0.14)] filter transition-transform duration-300 ease-out cursor-pointer select-none"
+            />
+          </button>
+        </div>
+        <p class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 dark:text-zinc-400 truncate">
+          01 // AWS ACADEMY GRADUATE · NOV 2026
+        </p>
+      </div>
+
+      <!-- 02: Septiembre de 2026 — Fundamentos de AWS (Commit Academy) -->
+      <div class="space-y-2">
+        <button
+          type="button"
+          class="cert-img-trigger w-full h-28 sm:h-32 block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
+          data-cert-src="/certs/cert_QM4dveLRJk.webp"
+          data-cert-alt="Fundamentos de AWS: Cloud, Serverless y Operación — Commit Academy"
+          aria-label="Ver certificado destacado: Fundamentos de AWS (Commit Academy)"
+        >
+          <div class="w-full h-full overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+            <img 
+              src="/certs/cert_QM4dveLRJk.webp" 
+              alt="Certificado Fundamentos de AWS Commit Academy"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+            />
+          </div>
+        </button>
+        <p class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 dark:text-zinc-400 truncate">
+          02 // FUNDAMENTOS DE AWS · SEP 2026
+        </p>
+      </div>
+
+      <!-- 03: Julio de 2026 — Curso Básico de IA Generativa (UCE · 40 Horas) -->
+      <div class="space-y-2">
+        <button
+          type="button"
+          class="cert-img-trigger w-full h-28 sm:h-32 block overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 shadow-xs cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 hover:scale-[1.02] hover:shadow-md transition-all duration-300 ease-out"
+          data-cert-src="/certs/3273_TRUJILLO VISTIN_1805372081-signed-signed.webp"
+          data-cert-alt="Curso Básico de Inteligencia Artificial Generativa — Universidad Central del Ecuador (40 Horas Académicas)"
+          aria-label="Ver certificado destacado: IA Generativa (Universidad Central del Ecuador)"
+        >
+          <div class="w-full h-full overflow-hidden rounded-lg bg-zinc-200 dark:bg-zinc-850">
+            <img 
+              src="/certs/3273_TRUJILLO VISTIN_1805372081-signed-signed.webp" 
+              alt="Certificado IA Generativa Universidad Central del Ecuador"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover object-top cursor-pointer block transition-transform duration-300 ease-out"
+            />
+          </div>
+        </button>
+        <p class="text-[10px] font-mono tracking-wider uppercase text-zinc-500 dark:text-zinc-400 truncate">
+          03 // IA GENERATIVA (40H ACADÉMICAS) · JUL 2026
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
   <!-- Editorial Footnote / Verification Guarantee -->
   <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 border-t border-zinc-900/15 dark:border-white/15">
     <div class="flex items-center gap-2">
